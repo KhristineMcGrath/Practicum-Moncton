@@ -21,7 +21,7 @@ include("Alert.php");
             <h2>Password Reset</h2>
             <div class="form-group">
                 <label for="EmailCode">Email</label>
-                <input type="text" id="EmailCode" name="EmailCode" placeholder="Enter your Email" required>
+                <input type="text" id="EmailCode" name="Email" placeholder="Enter your Email" required>
             </div>
             <button type="submit" class="btn">Send Code</button>
         </form>

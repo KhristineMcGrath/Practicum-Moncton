@@ -6,6 +6,7 @@ include("Alert.php");
 <?php
 if (($_POST["username"])) {
 
+    //Auntaticate 
     $sql = "SELECT `Username`, `Password`, `Email`, `Status` 
     FROM `employee` 
     WHERE `Username` = '".$_POST["username"]."' 
@@ -20,16 +21,16 @@ if (($_POST["username"])) {
 
 
             $msg = "Sucessfully Loged in";
-            header("location:index.php?message=$msg");  //redirect before evenr alreat box apprear
+            header("location:index.php?message=$msg");  //redirect before evenr aleart box apprear
 
             exit();
             //echo $_SESSION["SESS_FIRST_NAME"];
 
-    } else {
+    } else { 
         $msg = "Please check your username";
         header("location:Login.php?message=$msg");
     }
-} else {
+} else { //hit if directly trying to access page 
     $msg = "CAN'T ACCESS THIS PAGE DIRECTLY";
     header("location:Login.php?message=$msg");
 }

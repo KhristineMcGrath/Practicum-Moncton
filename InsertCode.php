@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+include("connect.php");
+include("Alert.php");
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
