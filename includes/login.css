@@ -1,3 +1,4 @@
+/* General styles */
 * {
     margin: 0;
     padding: 0;
@@ -13,33 +14,67 @@ body {
     align-items: center;
 }
 
+/* Login container styles */
 .login-container {
     background: #fff;
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 300px;
+    width: 350px;
+    text-align: center;
 }
 
-.login-form h2 {
-    text-align: center;
+/* Logo styling */
+.logo img {
+    width: 80px;
+    margin-bottom: 1.5rem;
+}
+
+/* Heading styles */
+h1 {
+    font-size: 2rem;
     margin-bottom: 1.5rem;
     color: #333;
 }
 
+/* Error message styling */
+.error-message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #f44336;
+    background-color: #f8d7da;
+    color: #721c24;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.error-message.error {
+    border-color: #f44336;
+    background-color: #f8d7da;
+}
+
+.error-message.success {
+    border-color: #28a745;
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* Form group styling */
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
     color: #555;
+    text-align: left;
 }
 
 .form-group input {
     width: 100%;
     padding: 0.8rem;
+    padding-right: 2.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
@@ -50,6 +85,7 @@ body {
     border-color: #3498db;
 }
 
+/* Button styles */
 .btn {
     width: 100%;
     padding: 0.8rem;
@@ -60,24 +96,67 @@ body {
     font-size: 1rem;
     cursor: pointer;
     transition: background 0.3s ease;
+    margin-top: 1rem;
 }
 
 .btn:hover {
     background: #2874a6;
 }
 
-.toggle-password {
-    margin-top: 0.5rem;
+/* Password visibility icon styling */
+.show-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
     background: none;
     border: none;
-    color: #3498db;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
+    color: #555;
     cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Password helper styling */
+.password-helper {
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.password-helper a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.password-helper a:hover {
     text-decoration: underline;
-    padding: 0;
 }
 
-.toggle-password:hover {
-    color: #2874a6;
+/* Wrapper for password input and toggle button */
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
+.password-container input {
+    flex: 1;
+    padding-right: 3rem; /* Add space for the toggle button */
+}
+
+.password-container .show-password {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.password-container .show-password:hover {
+    color: #3498db;
+}
