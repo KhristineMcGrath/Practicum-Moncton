@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 include("connect.php");
-include("Alert.php");
+//include("Alert.php");
 ?>
 <html lang="en">
 
@@ -16,7 +16,7 @@ include("Alert.php");
     <div class="login-container">
         <!-- Logo section -->
         <div class="logo">
-            <img src="includes/logo.png" alt="Logo">
+            <img src="includes/Logo.png" alt="Logo">
         </div>
 
         <!-- Error message display -->
@@ -24,7 +24,7 @@ include("Alert.php");
             <div class="error-message">
                 <?php echo htmlspecialchars($_GET['message']); ?>
             </div>
-        <?php endif; ?>
+        <?php endif; ?> 
 
         <form class="login-form" action="forgotPassword_proc.php" method="POST">
             <h2>Password Reset</h2>
