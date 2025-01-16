@@ -80,14 +80,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["Email"])) {
                     *
                     */
                     $mail->setFrom('fefone5701@kvegg.com', 'Moncton Community Center');
-                    $mail->addAddress( 'mihirpatel2629@gmail.com', 'Admin');     //Add a recipient
+                    $mail->addAddress( $email, 'Admin');     //Add a recipient
                     $mail->IsHTML(true); // If you're using HTML content
 
 
                     //Content
                     $mail->isHTML(true);                                  //Set email format to HTML
                     $mail->Subject = 'Password Reset Code';
-                    $mail->Body = "Your password reset code is: <b>$resetCode</b>
+                    $mail->Body = "Your password reset code is: <b>$resetCode</b><br><br>
                                    
                                    This code is valid for 30 minutes.";
 
