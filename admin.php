@@ -1,22 +1,5 @@
 <?php
-include("connect.php");
-
-// function to insert user into db
-function createUser($firstName, $lastName, $email, $role) {
-  global $con; // global conn
-
-  $sql = "INSERT INTO employee (FirstName, LastName, Email, Role) VALUES (?, ?, ?, ?)";
-  $stmt = $con->prepare($sql);
-  $stmt->bind_param("ssss", $firstName, $lastName, $email, $role);
-
-  if ($stmt->execute()) {
-    echo "New user created successfully";
-  } else {
-    echo "Error: " . $stmt->error;
-  }
-
-  $stmt->close();
-}
+include("dbHandlers/handleUser.php");
 
 // POST METHOD - collects data for the DB
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
