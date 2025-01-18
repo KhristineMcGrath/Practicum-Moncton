@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 include("connect.php");
+//include("Alert.php");
 ?>
 <html lang="en">
 
@@ -23,7 +24,7 @@ include("connect.php");
             <div class="error-message">
                 <?php echo htmlspecialchars($_GET['message']); ?>
             </div>
-        <?php endif; ?>
+        <?php endif; ?> 
 
         <form class="login-form" action="forgotPassword_proc.php" method="POST">
             <h2>Password Reset</h2>
