@@ -20,5 +20,3 @@ Admin
         <div class="box"><a href="club_shade.php">Club Shade</a></div>
         <div class="box"><a href="shift_management.php">Shift Management</a></div>
     </div>
-</body>
-</html>

@@ -2,7 +2,6 @@
 <?php
 include("connect.php");
 ?>
-
 <html lang="en">
 
 <head>
@@ -16,7 +15,7 @@ include("connect.php");
     <div class="login-container">
         <!-- Logo section -->
         <div class="logo">
-            <img src="includes/logo.png" alt="Logo">
+            <img src="includes/Logo.png" alt="Logo">
         </div>
 
         <!-- Error message display -->
