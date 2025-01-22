@@ -13,7 +13,7 @@ include("Alert.php");
 </head>
 <body>
     <div class="otp-container">
-        <form action="confirmOtp_proc.php" method="POST">
+        <form action="insertCodeProc.php" method="POST">
             <h2>Confirm OTP</h2>
             <p>Please enter the 6-digit OTP sent to your email address.</p>
             <div class="otp-inputs">

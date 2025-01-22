@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("connect.php");
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -49,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["EmailCode"])) {
             if ($updateStmt->execute()) {
                 // Send reset email
 
+                $_SESSION['reset_email'] = $email;
                 $mail = new PHPMailer(true);
                 try {
                     $mail->isSMTP();
