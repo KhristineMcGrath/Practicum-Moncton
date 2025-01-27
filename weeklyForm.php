@@ -76,6 +76,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </select>
                 <select name="pillar2">
                     <option value="">Select an option</option>
+                    <option value="Incidents">Incidents</option>
+                    <option value="Participation Levels">Participation Levels</option>
+                    <option value="Emotional Concerns">Emotional Concerns</option>
+                    <option value="Others">Others</option>
                 </select>
                 <select name="pillar3">
                     <option value="">Select an option</option>
@@ -96,6 +100,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <textarea name="notes5" placeholder="Notes"></textarea>
             </div>
             <br>
+            <div class="expenses-header">
+            <h2>Income</h2> 
+            <h2 class="expenses-header">Expenses</h2>
+            </div>
             <div class="budget-section">
                 <input type="text" name="income" placeholder="Income">
                 <div class="expenses">
@@ -111,9 +119,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="staff_signature">Staff Signature:</label>
                 <input type="text" id="staff_signature" name="staff_signature" placeholder="Enter your name">
             </div>
-            <button type="submit">Submit Report</button>
+            <button type="submit">Staff Signature</button>
         </form>
     </div>
 </body>
-
 </html>
