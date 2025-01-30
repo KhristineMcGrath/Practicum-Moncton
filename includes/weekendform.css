@@ -8,34 +8,67 @@ body {
     margin: 0;
 }
 
-.container {
+.weekendform-container {
     background-color: #fff;
-    padding: 20px;
+    padding: 30px;
     margin: 10px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 800px;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 h1 {
     text-align: center;
+    margin-bottom: 20px; 
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.date-section{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+} 
+.names-section {
+    display: flex;
+    flex-direction: column;
 }
 
 .names-section {
     text-align: right;
+    gap: 10px;
 }
 
 .signature-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 20px; 
+}
+
+.notes-section {
     margin-bottom: 20px;
+    
+}
+
+.notes-textarea {
+    width: 100%;
+    max-width: 100px;
+    max-height: 20px; 
+    resize: none;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-bottom: 5px;
 }
 
 th,
@@ -48,8 +81,13 @@ td {
 th {
     background-color: #f2f2f2;
 }
+.rowbtn {
+    color: tomato;
+}
 
-.btn {
+
+/*export and print buttons*/
+.exprintbtn {
     background-color: #007BFF;
     color: white;
     padding: 10px 20px;
@@ -59,6 +97,6 @@ th {
     margin-right: 10px;
 }
 
-.btn:hover {
+.exprintbtn:hover {
     background-color: #0056b3;
 }

@@ -7,9 +7,35 @@ body {
     height: 100vh;
     margin: 0;
 }
+
 .container {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
     text-align: center;
+    position: relative;
 }
+
+.logout-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.logout-button:hover {
+    background-color: #0056b3;
+}
+
 .box {
     background-color: #fff;
     padding: 20px;
@@ -19,11 +45,13 @@ body {
     width: 200px;
     display: inline-block;
 }
+
 .box a {
     text-decoration: none;
     color: #007BFF;
     font-weight: bold;
 }
+
 .box a:hover {
     color: #0056b3;
 }
