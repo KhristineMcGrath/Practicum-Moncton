@@ -15,7 +15,7 @@ Admin
         <form action="login.php" method="post">
         <input type="submit" value="Logout" class="logout-button">
         <h1>Welcome to MCRI's Management System</h1>
-        <div class="box"><a href="admin.php">User Configuration</a></div>
+        <div class="box"><a href="adminConfigure.php">User Configuration</a></div>
         <div class="box"><a href="">Client Registration</a></div>
         <div class="box"><a href="weekendform.php">Weekend Visit Form</a></div>
         <br>
@@ -24,7 +24,7 @@ Admin
         <div class="box"><a href="">Body Chart Form</a></div>
         <br>
         <div class="box"><a href="">Report Management</a></div>
-        <div class="box"><a href="">Conflict Form</a></div>
+        <div class="box"><a href="conflictForm.php">Conflict Form</a></div>
         <div class="box"><a href="">Quarterly Report</a></div>
         <br>
         <div class="box"><a href="">Form Management</a></div>
