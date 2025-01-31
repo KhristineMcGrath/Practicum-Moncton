@@ -1,0 +1,84 @@
+/* General styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(120deg, #3498db, #8e44ad);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Success container styles */
+.success-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;  /* Makes the form container wider */
+  text-align: center;
+}
+
+/* Heading styles */
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Success information styles */
+p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+strong {
+  color: #2980b9;
+}
+
+/* Button styling */
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .success-container {
+    max-width: 100%; /* Makes the form take up the full width on smaller screens */
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem; /* Smaller heading for mobile */
+  }
+
+  p {
+    font-size: 1rem; /* Adjust paragraph font size on smaller screens */
+  }
+
+  .btn {
+    font-size: 1rem; /* Adjust button size */
+    padding: 0.8rem 1.5rem;
+  }
+}

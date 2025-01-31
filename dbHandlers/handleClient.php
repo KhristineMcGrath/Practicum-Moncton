@@ -25,6 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $phone = trim($_POST['phone']);
 
   // call function
-  registerClient($firstName, $lastName, $email, $phone);
+  registerClient($firstName, $lastName, $email);
 }
 ?>

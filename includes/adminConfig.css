@@ -1,0 +1,278 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f3f8;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 4%;
+    background-color: #282c34;
+    color: #eaeaea;
+}
+
+header .logo img {
+    height: 50px;
+}
+
+header .title h1 {
+    font-size: 2.2rem;
+    margin: 0;
+}
+
+header nav .nav-button {
+    background-color: #1a73e8;
+    color: #ffffff;
+    padding: 8px 18px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+header nav .nav-button:hover {
+    background-color: #165fa3;
+    transform: scale(1.05);
+}
+
+/* Main Section */
+main {
+    padding: 2.5% 4%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* User Management Section */
+.user-management {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+}
+
+/* Add User Button */
+.add-user-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.4s, transform 0.3s;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 15px;
+}
+
+.add-user-button:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
+}
+
+.add-user-button:active {
+    transform: translateY(2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* User List Table */
+.user-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2%;
+    font-size: 1rem;
+    table-layout: fixed;
+}
+
+.user-list th, .user-list td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.user-list th {
+    background-color: #3a3f47;
+    color: #ffffff;
+}
+
+.user-list tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.user-list tr:hover {
+    background-color: #e2e6ea;
+}
+
+/* Larger Email and Temporary Password Rows */
+.email-row, .temporary-password-row {
+    font-size: 1.2rem; /* Make text larger */
+    padding: 16px; /* Make padding larger */
+    background-color: #f1f3f8; /* Light background to distinguish */
+    border: 1px solid #ddd;
+    margin-bottom: 15px; /* Add some spacing between the rows */
+}
+
+/* Temporary Password Section */
+.temp-pass-section {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Temporary Password Button */
+.temp-pass-button {
+    background-color: #f0ad4e;
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    margin-bottom: 8px;
+}
+
+.temp-pass-button:hover {
+    background-color: #ec971f;
+}
+
+/* Destroy Password Button */
+.destroy-pass-button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    margin-top: 5px;
+}
+
+.destroy-pass-button:hover {
+    background-color: #c9302c;
+}
+
+/* Generated Code Text */
+.generated-code {
+    font-weight: bold;
+    color: #28a745;
+}
+
+/* Remove Button */
+.action-button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: #c9302c;
+}
+
+/* Add margin between action rows */
+.generate-row, .temporary-password-row {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Button Styles */
+.generate-row button, .temporary-password-row button {
+    margin-bottom: 8px;
+}
+
+.generate-row button:last-child, .temporary-password-row button:last-child {
+    margin-bottom: 0;
+}
+
+/* Edit Button */
+.edit-button {
+    background-color: #ff8c00;
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-right: 6px;
+}
+
+.edit-button:hover {
+    background-color: #e67e00;
+}
+
+/* Toggle Status Button */
+.toggle-status-button {
+    color: white;
+    font-weight: bold;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-status-button:hover {
+    opacity: 0.85;
+}
+
+.toggle-status-button.active {
+    background-color: #e74c3c;
+}
+
+.toggle-status-button.inactive {
+    background-color: #2ecc71;
+}
+
+/* Swap Button */
+.swap-button {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    position: absolute;
+    right: 20px;
+    top: 0;
+}
+
+/* Action Button Container */
+.generate-row, .temporary-password-row {
+    position: relative;
+}
+
+/* Swap Button Hover and Active Effects */
+.swap-button:hover {
+    background-color: #138496;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
+}
+
+.swap-button:active {
+    transform: translateY(2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
