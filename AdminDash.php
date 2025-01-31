@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="includes/homepage.css">
+    <link rel="stylesheet" href="includes/Dashboard.css">
     <title>Admin Dashboard</title>
     
 </head>
@@ -12,13 +12,26 @@
 Admin
 <div class="container">
         <!-- container for homepage options - jj -->
+        <form action="login.php" method="post">
+        <input type="submit" value="Logout" class="logout-button">
         <h1>Welcome to MCRI's Management System</h1>
-        <div class="box"><a href="adminConfigure.php">Configure User's</a></div>
-        <div class="box"><a href="client_registration.php">Client Registration</a></div>
-        <div class="box"><a href="form_section.php">Form Section</a></div>
-        <div class="box"><a href="reports_section.php">Reports Section</a></div>
-        <div class="box"><a href="club_shade.php">Club Shade</a></div>
-        <div class="box"><a href="shift_management.php">Shift Management</a></div>
+        <div class="box"><a href="admin.php">User Configuration</a></div>
+        <div class="box"><a href="">Client Registration</a></div>
+        <div class="box"><a href="weekendform.php">Weekend Visit Form</a></div>
+        <br>
+        <div class="box"><a href="">Staff Management</a></div>
+        <div class="box"><a href="weeklyForm.php">Weekly Visit Form</a></div>
+        <div class="box"><a href="">Body Chart Form</a></div>
+        <br>
+        <div class="box"><a href="">Report Management</a></div>
+        <div class="box"><a href="">Conflict Form</a></div>
+        <div class="box"><a href="">Quarterly Report</a></div>
+        <br>
+        <div class="box"><a href="">Form Management</a></div>
+        <div class="box"><a href="">Clube Shades</a></div>
+        <div class="box"><a href="">Orientation Package</a></div>
+        <br>
+        <div class="box"><a href="">Visitor Logs / SILP</a></div>    
     </div>
 </body>
 </html>
