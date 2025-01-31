@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 include("connect.php");
-//include("Alert.php");
+include("Alert.php");
 ?>
 <html lang="en">
 
