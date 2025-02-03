@@ -25,7 +25,7 @@ Admin
         <br>
         <div class="box"><a href="">Report Management</a></div>
         <div class="box"><a href="conflictForm.php">Conflict Form</a></div>
-        <div class="box"><a href="">Quarterly Report</a></div>
+        <div class="box"><a href="Quarterly.php">Quarterly Report</a></div>
         <br>
         <div class="box"><a href="">Form Management</a></div>
         <div class="box"><a href="">Clube Shades</a></div>
