@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.logo {
+    width: 80px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+th {
+    background-color: #f2f2f2;
+}
+input[type="text"] {
+    width: 50px;
+    text-align: center;
+}
+.controls, .export-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.controls select, .apply {
+    padding: 5px 10px;
+}
+button {
+    padding: 8px 12px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+button:hover {
+    background-color: #0056b3;
+}
+.back-button {
+    margin-bottom: 20px;
+    display: inline-block;
+    background-color: #6c757d;
+}
+.back-button:hover {
+    background-color: #5a6268;
+}
+@media (max-width: 600px) {
+    .controls, .export-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    table {
+        font-size: 14px;
+    }
+}
