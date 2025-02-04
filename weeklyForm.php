@@ -69,26 +69,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="pillar-dropdowns">
                 <select name="pillar1">
                     <option value="">Select an option</option>
-                    <option value="Community Interaction">Community Interaction</option>
+                    <option value="Community Interaction">Leisure Activity</option>
                     <option value="Volunteering">Volunteering</option>
                     <option value="Employment">Employment</option>
                     <option value="Others">Others</option>
                 </select>
                 <select name="pillar2">
                     <option value="">Select an option</option>
-                    <option value="Incidents">Incidents</option>
-                    <option value="Participation Levels">Participation Levels</option>
+                    <option value="Incidents">Resource Available</option>
+                    <option value="Participation Levels">Number of Incidents</option>
+                    <option value="Incidents">Level of Participation</option>
                     <option value="Emotional Concerns">Emotional Concerns</option>
                     <option value="Others">Others</option>
                 </select>
                 <select name="pillar3">
                     <option value="">Select an option</option>
                 </select>
-                <select name="pillar4">
+                <select name="pillar4"> <!-- Add a secondary drop down within a dropdown? -->
                     <option value="">Select an option</option>
+                    <option value="">Participation in Community</option>
+                    <option value="">Interaction with Family/Support Network</option>
+                    <option value="">Others</option>
                 </select>
                 <select name="pillar5">
                     <option value="">Select an option</option>
+                    <option value="">Number of Support Hours</option>
+                    <option value="">Skills</option>
+                    <option value="">Others</option>
                 </select>
             </div>
             <br>
@@ -100,9 +107,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <textarea name="notes5" placeholder="Notes"></textarea>
             </div>
             <br>
-            <div class="expenses-header">
-            <h2>Income</h2> 
-            <h2 class="expenses-header">Expenses</h2>
+            <div class="header-container">
+                <h2>Income</h2> 
+                <h2>Expenses</h2>
             </div>
             <div class="budget-section">
                 <input type="text" name="income" placeholder="Income">
@@ -119,7 +126,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="staff_signature">Staff Signature:</label>
                 <input type="text" id="staff_signature" name="staff_signature" placeholder="Enter your name">
             </div>
-            <button type="submit">Staff Signature</button>
+            <br>
+            <button type="submit">Export to PDF</button>
+            <button type="submit">Print</button>
+            <button type="submit">Save Draft</button>
         </form>
     </div>
 </body>

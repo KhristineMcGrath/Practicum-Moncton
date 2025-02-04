@@ -20,7 +20,7 @@
                         <input type="text" name="last_name" placeholder="Last Name">
                     </div>
                     <div class="section">
-                        <label>Time</label>
+                        <label>Start of Conflict</label> 
                         <input type="time" name="day">
                         <label>Date</label>
                         <input type="date" name="date">
@@ -34,8 +34,8 @@
                         <input type="text" name="staff_last_name" placeholder="Staff Last Name">
                     </div>
                     <div class="section">
-                        <label>Length of Conflict</label>
-                        <input type="text" name="conflict_length" placeholder="Hours">
+                    <label>End of Conflict</label> <!-- Look at length of conflict for time section. -->
+                    <input type="time" name="day">
                     </div>
                 </div>
             </div>

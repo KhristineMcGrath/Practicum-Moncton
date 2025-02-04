@@ -28,7 +28,7 @@ Admin
         <div class="box"><a href="">Quarterly Report</a></div>
         <br>
         <div class="box"><a href="">Form Management</a></div>
-        <div class="box"><a href="">Clube Shades</a></div>
+        <div class="box"><a href="">Club Shades</a></div>
         <div class="box"><a href="">Orientation Package</a></div>
         <br>
         <div class="box"><a href="">Visitor Logs / SILP</a></div>    
