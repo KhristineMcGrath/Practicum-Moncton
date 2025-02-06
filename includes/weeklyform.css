@@ -57,13 +57,13 @@ form {
 .pillar-dropdowns {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+  gap: 5px;
 }
 
 .pillar-dropdowns select {
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
 .notes-section {
@@ -131,11 +131,11 @@ form {
     grid-template-columns: 1fr;
   }
 }
-/* .header-container {
+.header-container {
   display: grid;
-  justify-content:space-around; 
-  align-items: center; 
-} */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
 
 button {
   font-size: 16px;

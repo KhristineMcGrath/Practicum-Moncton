@@ -58,12 +58,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </form>
             </div>
             <br>
-            <!-- The 5 pillars with dropdown sections-->
+            <!-- The 5 pillars with dropdown sections, pull pillar titles after
+             MUST have an option to add more entries under each pillar.
+            -->
             <div class="pillars">
                 <div>Pillar 1<br>Inclusion</div>
                 <div>Pillar 2<br>Unique/Designed Services</div>
                 <div>Pillar 3<br>Stability</div>
-                <div>Pillar 4<br>Linking Connections</div>
+                <div>Pillar 4<br>Lifelong Connection</div>
                 <div>Pillar 5<br>Increased Independence</div>
             </div>
             <div class="pillar-dropdowns">
@@ -88,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <select name="pillar4"> <!-- Add a secondary drop down within a dropdown? -->
                     <option value="">Select an option</option>
                     <option value="">Participation in Community</option>
-                    <option value="">Interaction with Family/Support Network</option>
+                    <option value="">Family/Support Network</option>
                     <option value="">Others</option>
                 </select>
                 <select name="pillar5">
@@ -108,8 +110,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <br>
             <div class="header-container">
-                <h2>Income</h2> 
-                <h2>Expenses</h2>
+                <div>
+                    <h2>Income</h2>
+                </div>
+                <div>
+                    <h2>Expenses</h2>
+                </div>
             </div>
             <div class="budget-section">
                 <input type="text" name="income" placeholder="Income">
@@ -121,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <br>
             <textarea class="notes-box" name="general_notes" placeholder="General Notes"></textarea>
-                    <!-- E-Sign section, looking into third party vendor to put here.  -->
+            <!-- E-Sign section, looking into third party vendor to put here.  -->
             <div class="signature-section">
                 <label for="staff_signature">Staff Signature:</label>
                 <input type="text" id="staff_signature" name="staff_signature" placeholder="Enter your name">
@@ -133,4 +139,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 </body>
+
 </html>
