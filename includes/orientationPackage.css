@@ -1,0 +1,279 @@
+/* most of this is copied from weekendform.css - jj  */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0 10px; 
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.back-button-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.form-row-btns {
+    display: flex;
+    margin-left: 550px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.form-row-date {
+    display: flex;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.form-row-time {
+    display: flex;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 10px;
+}
+.form-house {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 10px;
+    margin-left: 60px;
+}
+.form-category {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 10px;
+    margin-left: 60px;
+}
+.form-group-supervisor {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 10px;
+    margin-left: 60px;
+}
+
+.form-group.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    margin: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+/* i just ripped this code off the other buttons */
+.btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.notes-textarea {
+    width: 100%;
+    max-width: 480px;
+    max-height: 80px; 
+    resize: none;
+}
+.addbtn {
+    background-color: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.removebtn {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 10px;
+    width: auto;
+}
+.backbtn {
+    background-color: #6c757d;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 10px;
+    width: auto;
+}
+
+.section-divider {
+    border: 0;
+    height: 1px;
+    background-color: black;
+    margin: 5px 0;
+  }
+/* responsive code WIP - jj */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        width: 100%;
+        margin: 0 0 20px 0;
+    }
+
+    .form-group.center {
+        align-items: flex-start;
+    }
+
+    .form-group {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .form-group label {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .form-group-center {
+        text-align: center;
+    }
+
+    .form-house, .form-category {
+        width: 100%;
+    }
+
+    .form-group-supervisor {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .backbtn, .addbtn, .removebtn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 50px;
+        width: 100%;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        width: 100%;
+        margin: 0 0 20px 0;
+    }
+
+    .form-group.center {
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .form-group label {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .form-group-center {
+        text-align: center;
+    }
+
+    .form-house, .form-category {
+        width: 100%;
+    }
+
+    .form-group-supervisor {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .backbtn, .addbtn, .removebtn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
