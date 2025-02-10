@@ -1,5 +1,5 @@
 <?php
-define('DB_HOST', 'monctondbconnection.redirectme.net'); //or localhost if working  on mysql
+define('DB_HOST', 'monctondbconnection.redirectme.net'); //or localhost if working  on mysql 
 define('DB_USER', 'root'); 
 define('DB_PASS', 'MonctonDB2024094'); //or blank if working locally on mysql
 define('DB_NAME', 'monctondb');
