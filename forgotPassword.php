@@ -26,7 +26,7 @@ include("Alert.php");
             </div>
         <?php endif; ?> 
 
-        <form class="login-form" action="forgotPassword_proc.php" method="POST">
+        <form class="login-form" action="ProcedurePages/forgotPassword_proc.php" method="POST">
             <h2>Password Reset</h2>
             <div class="form-group">
                 <label for="EmailCode">Email</label>

@@ -115,6 +115,41 @@ if ($con->multi_query($sql)) {
     echo "Error: " . $con->error;
 }
 
+// $_POST NAME of the field....
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $p_Staff_FirstName = trim($_POST['Staff_FirstName']); // left matches parameters, right matches form name.
+    $p_Staff_LastName = trim($_POST['Staff_LastName']);
+    $p_StartTime = trim($_POST['StartTime']);
+    $p_Date = trim($_POST['Date']);
+    $p_Damage_Injury = trim($_POST['Damage_Injury']);
+    $p_Police_Involved = trim($_POST['Police_Involved']);
+    $p_SocialWorker_Contacted = trim($_POST['SocialWorker_Contacted']);
+    $p_Why_SW_Contacted = trim($_POST['Why_SW_Contacted']);
+    $p_Observation = trim($_POST['Observation']);
+    $p_Individual_Action = trim($_POST['Individual_Action']);
+    $p_Consequences = trim($_POST['Consequences']);
+    $p_Emotional_Ok = trim($_POST['Emotional_Ok']);
+    $p_Support_Plan = trim($_POST['Support_Plan']);
+    $p_Team_Lead = trim($_POST['Team_Lead']);
+    $p_Signature = trim($_POST['Signature']);
+    $p_Safe_Option = trim($_POST['Safe_Option']);
+    $p_Team_Ok = trim($_POST['Team_Ok']);
+    $p_Changes = trim($_POST['Changes']);
+  }
+
+
+$stmt = $con->prepare("CALL InsertConflict(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+$stmt->bindParam("issiissiissssiiisiss",$p_Client_ID, $p_Staff_FirstName, $p_Staff_LastName, $p_StartTime, $p_EndTime, $p_Date,
+$p_Damage_Injury, $p_Police_Involved, $p_SocialWorker_Contacted, $p_Why_SW_Contacted,
+$p_Observation, $p_Individual_Action, $p_Consequences, $p_Emotional_Ok, $p_Support_Plan,
+$p_Team_Lead, $p_Signature, $p_Safe_Option, $p_Team_Ok, $p_Changes );
+
+$stmt->execute();
+
+$stmt->close();
+
+
 // Print out insert to debug.
 echo "<pre>";
 print_r($_POST);

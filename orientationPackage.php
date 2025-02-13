@@ -50,7 +50,7 @@
   </div>
     <h1>Orientation Package Form</h1>
     <hr class="section-divider">
-    <form name="orientationPackage" method="POST" action="">
+    <form name="orientationPackage" method="POST" action=""> <!-- ProcedurePages/orientationPackage_proc.php -->
       <div class="form-row">
         <div class="form-group">
           <label>Staff First Name: <input type="text" name="staff_first_name" required></label>

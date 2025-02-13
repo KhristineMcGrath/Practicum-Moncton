@@ -26,7 +26,7 @@
 </head>
 
 <body>
-    <form action="conflictForm_proc.php" method="POST"> <!--Post is needed to process the stored procedure. -->
+    <form action="ProcedurePages/conflictForm_proc.php" method="POST"> <!--Post is needed to process the stored procedure. -->
         <div class="container">
             <!-- Top section should be split into 2 grids, possibly more? -->
             <h2>CONFLICT REPORT</h2>
