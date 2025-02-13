@@ -68,7 +68,7 @@
                 </div>
                 <div class="section">
                     <label>Estimated Cost of Damages?</label>
-                    <input type="text" name="cost">
+                    <input type="text" name="Cost">
                 </div>
                 <button type="button" onclick="addTextbox('section1')">Add Row</button> <br>
                 <div id="section1"></div><br>

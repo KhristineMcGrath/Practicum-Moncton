@@ -12,7 +12,7 @@
 
 // DELIMITER ;
 
-include('connect.php');
+include('../connect.php');
 
 $sql = "
 DROP PROCEDURE IF EXISTS InsertConflict;
@@ -115,11 +115,18 @@ if ($con->multi_query($sql)) {
     echo "Error: " . $con->error;
 }
 
-// $_POST NAME of the field....
+// WHEN doing multi stored procedures run this so that it will move on to the next result set.
+while ($con->more_results()) {
+    $con->next_result();
+}
+
+
+// Insert Conflict.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $p_Staff_FirstName = trim($_POST['Staff_FirstName']); // left matches parameters, right matches form name.
     $p_Staff_LastName = trim($_POST['Staff_LastName']);
     $p_StartTime = trim($_POST['StartTime']);
+    $p_EndTime = trim($_POST['EndTime']);
     $p_Date = trim($_POST['Date']);
     $p_Damage_Injury = trim($_POST['Damage_Injury']);
     $p_Police_Involved = trim($_POST['Police_Involved']);
@@ -140,14 +147,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $stmt = $con->prepare("CALL InsertConflict(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-$stmt->bindParam("issiissiissssiiisiss",$p_Client_ID, $p_Staff_FirstName, $p_Staff_LastName, $p_StartTime, $p_EndTime, $p_Date,
+$stmt->bind_param("issssssiissssiiisiss",$p_Client_ID, $p_Staff_FirstName, $p_Staff_LastName, $p_StartTime, $p_EndTime, $p_Date,
 $p_Damage_Injury, $p_Police_Involved, $p_SocialWorker_Contacted, $p_Why_SW_Contacted,
 $p_Observation, $p_Individual_Action, $p_Consequences, $p_Emotional_Ok, $p_Support_Plan,
-$p_Team_Lead, $p_Signature, $p_Safe_Option, $p_Team_Ok, $p_Changes );
+$p_Team_Lead, $p_Signature, $p_Safe_Option, $p_Team_Ok, $p_Changes);
 
 $stmt->execute();
-
 $stmt->close();
+
+// Insert Estimate.
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $p_Incident_ID = trim($_POST['Incident_ID']); // ## INCIDENT ID IS A FK should I pass through the estimate as well even
+    // though it is AI num?
+    $p_Cost = trim($_POST['Cost']);
+}
+
+
+$stmt = $con->prepare("CALL InsertEstimate(?, ?)");
+
+$stmt->bind_param("is",$p_Incident_ID, $p_Cost); 
+$stmt->execute();
+$stmt->close();
+
+
+
+
+
+
 
 
 // Print out insert to debug.
