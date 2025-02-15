@@ -50,7 +50,7 @@
   </div>
     <h1>Orientation Package Form</h1>
     <hr class="section-divider">
-    <form name="orientationPackage" method="POST" action="">
+    <form name="orientationPackage" method="POST" action="orientationPackage_proc.php">
       <div class="form-row">
         <div class="form-group">
           <label>Staff First Name: <input type="text" name="staff_first_name" required></label>
@@ -85,9 +85,9 @@
       </div>
 
       <div class="form-row-date">
-        <label>Date: <input type="date" name="date"></label>
+        <label>Date: <input type="date" name="orientationform_date[]"></label>
         <div class="form-row-time">
-        <label>Time: <input type="time" name="time" style="width: 100px;"></label>
+        <label>Time: <input type="time" name="orientationform_time[]" style="width: 100px;"></label>
   </div>
       </div>
 

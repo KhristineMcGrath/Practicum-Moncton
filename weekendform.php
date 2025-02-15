@@ -94,17 +94,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </ul>
       </div>
     <?php endif; ?>
-    <form method="POST" action="">
+    <form method="POST" action="weekendForm_proc.php">
       <div class="form-row">
         <div class="date-section">
           <label>Weekday:
             <select name="weekday" required>
               <option value="">Select a weekday</option>
-              <option value="Monday">Monday</option>
-              <option value="Tuesday">Tuesday</option>
-              <option value="Wednesday">Wednesday</option>
-              <option value="Thursday">Thursday</option>
-              <option value="Friday">Friday</option>
               <option value="Saturday">Saturday</option>
               <option value="Sunday">Sunday</option>
             </select>
