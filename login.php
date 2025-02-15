@@ -50,7 +50,7 @@ include("Alert.php");
         <?php endif; ?>
 
         <!-- Form with POST method to submit login -->
-        <form class="login-form" action="login_proc.php" method="POST">
+        <form class="login-form" action="ProcedurePages/login_proc.php" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Enter your username" required>
