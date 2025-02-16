@@ -55,49 +55,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->begin_transaction();
 
     try {
-        // first insert into orientation table
-        $stmt = $conn->prepare("INSERT INTO orientation (staff_firstname, staff_lastname, house, category, supervisor_firstname, supervisor_lastname, feedback, signature, orientation_date, orientationform_time, employee_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        // insert into orientation table using stored procedure
+        $stmt = $conn->prepare("CALL InsertOrientation(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, @orientationId)");
         $stmt->bind_param("ssssssssssi", $staffFirstName, $staffLastName, $house, $category, $supervisorFirstName, $supervisorLastName, $feedback, $staffSignature, $orientationform_date[0], $orientationform_time[0], $employeeId);
+        $stmt->execute();
+        $stmt->close();
 
-        if ($stmt->execute()) {
-            // get last inserted id
-            $orientationId = $stmt->insert_id;
+        // get the last inserted orientation ID
+        $result = $conn->query("SELECT @orientationId AS orientationId");
+        $row = $result->fetch_assoc();
+        $orientationId = $row['orientationId'];
 
-            // insert into orientation_shifts table
-            $shiftStmt = $conn->prepare("INSERT INTO orientation_shifts (orientation_id, shift_date, time, location) VALUES (?, ?, ?, ?)");
-            $shiftIds = [];
-            foreach ($shifts as $index => $shiftDate) {
-                $shiftTime = $shiftTimes[$index] ?? '';
-                $shiftLocation = $shiftLocations[$index] ?? '';
-                $shiftStmt->bind_param("isss", $orientationId, $shiftDate, $shiftTime, $shiftLocation);
-                $shiftStmt->execute();
-                $shiftIds[] = $shiftStmt->insert_id;
-                $shiftStmt->reset();
-            }
-
-            // insert tasks
-            $taskStmt = $conn->prepare("INSERT INTO orientation_tasks (orientation_id, shift_id, task, complete) VALUES (?, ?, ?, ?)");
-            foreach ($tasks as $index => $taskDescription) {
-                $taskCompletedStatus = isset($taskCompleted[$index]) ? 1 : 0;
-                $shiftId = $shiftIds[$index] ?? null;
-                if ($shiftId) {
-                    $taskStmt->bind_param("iisi", $orientationId, $shiftId, $taskDescription, $taskCompletedStatus);
-                    $taskStmt->execute();
-                    $taskStmt->reset();
-                }
-            }
-
-            // commit
-            $conn->commit();
-            echo "Orientation package submitted successfully.";
-
-            // close statements
-            $shiftStmt->close();
-            $taskStmt->close();
+        // insert into orientation_shifts table using stored procedure
+        foreach ($shifts as $index => $shiftDate) {
+            $shiftTime = $shiftTimes[$index] ?? '';
+            $shiftLocation = $shiftLocations[$index] ?? '';
+            $stmt = $conn->prepare("CALL InsertOrientationShift(?, ?, ?, ?)");
+            $stmt->bind_param("isss", $orientationId, $shiftDate, $shiftTime, $shiftLocation);
+            $stmt->execute();
             $stmt->close();
-        } else {
-            throw new Exception("Error inserting into orientation table: " . $stmt->error);
         }
+
+        // insert tasks using stored procedure
+        foreach ($tasks as $index => $taskDescription) {
+            $taskCompletedStatus = isset($taskCompleted[$index]) ? 1 : 0;
+            $stmt = $conn->prepare("CALL InsertOrientationTask(?, ?, ?, ?)");
+            $stmt->bind_param("iisi", $orientationId, $shiftId, $taskDescription, $taskCompletedStatus);
+            $stmt->execute();
+            $stmt->close();
+        }
+
+        // commit
+        $conn->commit();
+        echo "Orientation package submitted successfully.";
     } catch (Exception $e) {
         // rollback if error
         $conn->rollback();
