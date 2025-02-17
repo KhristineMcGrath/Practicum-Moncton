@@ -17,7 +17,7 @@ include('../connect.php');
 $sql = "
 DROP PROCEDURE IF EXISTS InsertConflict;
 CREATE PROCEDURE InsertConflict(
-    IN p_Client_ID INT,
+    IN p_Emp_ID INT,
     IN p_Staff_FirstName VARCHAR(50),
     IN p_Staff_LastName VARCHAR(50),
     IN p_StartTime TIME,
@@ -40,12 +40,12 @@ CREATE PROCEDURE InsertConflict(
 )
 BEGIN
     INSERT INTO conflict (
-        Client_ID, Staff_FirstName, Staff_LastName, StartTime, EndTime, Date,
+        Emp_ID, Staff_FirstName, Staff_LastName, StartTime, EndTime, Date,
         Damage_Injury, Police_Involved, SocialWorker_Contacted, Why_SW_Contacted,
         Observation, Individual_Action, Consequences, Emotional_Ok, Support_Plan,
         Team_Lead, Signature, Safe_Option, Team_Ok, Changes
     ) VALUES (
-        p_Client_ID, p_Staff_FirstName, p_Staff_LastName, p_StartTime, p_EndTime, p_Date,
+        p_Emp_ID, p_Staff_FirstName, p_Staff_LastName, p_StartTime, p_EndTime, p_Date,
         p_Damage_Injury, p_Police_Involved, p_SocialWorker_Contacted, p_Why_SW_Contacted,
         p_Observation, p_Individual_Action, p_Consequences, p_Emotional_Ok, p_Support_Plan,
         p_Team_Lead, p_Signature, p_Safe_Option, p_Team_Ok, p_Changes
@@ -60,6 +60,7 @@ CREATE PROCEDURE InsertEstimate(
 BEGIN
     INSERT INTO estimate (Incident_ID, Cost)
     VALUES (p_Incident_ID, p_Cost);
+    
 END;
 
 DROP PROCEDURE IF EXISTS InsertOfficer;
@@ -123,31 +124,48 @@ while ($con->more_results()) {
 
 // Insert Conflict.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $p_Staff_FirstName = trim($_POST['Staff_FirstName']); // left matches parameters, right matches form name.
-    $p_Staff_LastName = trim($_POST['Staff_LastName']);
-    $p_StartTime = trim($_POST['StartTime']);
-    $p_EndTime = trim($_POST['EndTime']);
-    $p_Date = trim($_POST['Date']);
-    $p_Damage_Injury = trim($_POST['Damage_Injury']);
-    $p_Police_Involved = trim($_POST['Police_Involved']);
-    $p_SocialWorker_Contacted = trim($_POST['SocialWorker_Contacted']);
-    $p_Why_SW_Contacted = trim($_POST['Why_SW_Contacted']);
-    $p_Observation = trim($_POST['Observation']);
-    $p_Individual_Action = trim($_POST['Individual_Action']);
-    $p_Consequences = trim($_POST['Consequences']);
-    $p_Emotional_Ok = trim($_POST['Emotional_Ok']);
-    $p_Support_Plan = trim($_POST['Support_Plan']);
-    $p_Team_Lead = trim($_POST['Team_Lead']);
-    $p_Signature = trim($_POST['Signature']);
-    $p_Safe_Option = trim($_POST['Safe_Option']);
-    $p_Team_Ok = trim($_POST['Team_Ok']);
-    $p_Changes = trim($_POST['Changes']);
+    $p_Emp_ID = trim($_POST['Emp_ID'] ?? null);
+    $p_Staff_FirstName = trim($_POST['Staff_FirstName'] ?? null);
+    $p_Staff_LastName = trim($_POST['Staff_LastName'] ?? null);
+    $p_StartTime = trim($_POST['StartTime'] ?? null);
+    $p_EndTime = trim($_POST['EndTime'] ?? null);
+    $p_Date = trim($_POST['Date'] ?? null);
+    $p_Damage_Injury = trim($_POST['Damage_Injury'] ?? null);
+    $p_Police_Involved = trim($_POST['Police_Involved'] ?? null);
+    $p_SocialWorker_Contacted = trim($_POST['SocialWorker_Contacted'] ?? null);
+    $p_Why_SW_Contacted = trim($_POST['Why_SW_Contacted'] ?? null);
+    $p_Observation = trim($_POST['Observation'] ?? null);
+    $p_Individual_Action = trim($_POST['Individual_Action'] ?? null);
+    $p_Consequences = trim($_POST['Consequences'] ?? null);
+    $p_Emotional_Ok = trim($_POST['Emotional_Ok'] ?? null);
+    $p_Support_Plan = trim($_POST['Support_Plan'] ?? null);
+    $p_Team_Lead = trim($_POST['Team_Lead'] ?? null);
+    $p_Signature = trim($_POST['Signature'] ?? null);
+    $p_Safe_Option = trim($_POST['Safe_Option'] ?? null);
+    $p_Team_Ok = trim($_POST['Team_Ok'] ?? null);
+    $p_Changes = trim($_POST['Changes'] ?? null);
+    $p_Cost = trim($_POST['Cost'] ?? null);
+    $p_Officer_FullName = trim($_POST['officer_name'] ?? null);
+    $p_Options = isset($_POST['Options']) ? $_POST['Options'] : []; // sets options as an array but has issues with functionality of starting first
+    // block off at 0 index, and the second one is label as array [textboxes]. Combine or change functionalty? 
+    
   }
 
-
+// This is to grab Emp_ID from table prior to inserting. 
+  $stmt = $con->prepare("SELECT Emp_ID FROM employee WHERE FirstName = ? 
+  AND LastName = ?");
+  $stmt->bind_param("ss", $p_Staff_FirstName, $p_Staff_LastName);
+  $stmt->execute();
+  $stmt->bind_result($p_Emp_ID);
+  $stmt->fetch();
+  $stmt->close();
+  
+  //Debugging.
+  echo "Emp_ID Retrieved: " . $p_Emp_ID;
+  
 $stmt = $con->prepare("CALL InsertConflict(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-$stmt->bind_param("issssssiissssiiisiss",$p_Client_ID, $p_Staff_FirstName, $p_Staff_LastName, $p_StartTime, $p_EndTime, $p_Date,
+$stmt->bind_param("isssssssissssiiisiss",$p_Emp_ID, $p_Staff_FirstName, $p_Staff_LastName, $p_StartTime, $p_EndTime, $p_Date,
 $p_Damage_Injury, $p_Police_Involved, $p_SocialWorker_Contacted, $p_Why_SW_Contacted,
 $p_Observation, $p_Individual_Action, $p_Consequences, $p_Emotional_Ok, $p_Support_Plan,
 $p_Team_Lead, $p_Signature, $p_Safe_Option, $p_Team_Ok, $p_Changes);
@@ -155,33 +173,91 @@ $p_Team_Lead, $p_Signature, $p_Safe_Option, $p_Team_Ok, $p_Changes);
 $stmt->execute();
 $stmt->close();
 
-// Insert Estimate.
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $p_Incident_ID = trim($_POST['Incident_ID']); // ## INCIDENT ID IS A FK should I pass through the estimate as well even
-    // though it is AI num?
-    $p_Cost = trim($_POST['Cost']);
+// ## Insert Estimate.
+// This is to grab Emp_ID from table prior to inserting. 
+$p_Incident_ID = $con->insert_id;
+
+$stmt = $con->prepare("SELECT Incident_ID FROM conflict WHERE Incident_ID = ?");
+$stmt->bind_param("i", $p_Incident_ID);
+$stmt->execute();
+$stmt->bind_result($p_Incident_ID);
+$stmt->fetch();
+$stmt->close();
+
+$result = $con->query("SELECT LAST_INSERT_ID() AS Incident_ID");
+    $row = $result->fetch_assoc();
+    $p_Incident_ID = $row['Incident_ID'];
+
+    if ($p_Cost !== null) {
+        $stmt = $con->prepare("CALL InsertEstimate(?, ?)");
+        $stmt->bind_param("id", $p_Incident_ID, $p_Cost);
+        if (!$stmt->execute()) {
+            die("Error inserting estimate: " . $stmt->error);
+        }
+        $stmt->close();
+    }
+        echo "Incident_ID Retrieved: " . $p_Incident_ID;
+
+// ## Insert Officer.
+if (!empty($p_Officer_FullName)) {
+    $stmt = $con->prepare("CALL InsertOfficer(?, ?)");
+    $stmt->bind_param("is", $p_Incident_ID, $p_Officer_FullName);
+    
+    if (!$stmt->execute()) {
+        die("Error inserting officer: " . $stmt->error);
+    }
+    $stmt->close();
+}
+//Debug
+echo "Officer Inserted: " . $p_Officer_FullName;
+
+// Ensure at least one option exists before inserting!
+if ($p_Option1 || $p_Option2 || $p_Option3 || $p_Option4 || $p_Option5) {
+    $stmt = $con->prepare("CALL InsertOption(?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("issss", $p_Incident_ID, $p_Option1, $p_Option2, $p_Option3, $p_Option4, $p_Option5);
+
+    if (!$stmt->execute()) {
+        die("Error inserting options: " . $stmt->error);
+    }
+    $stmt->close();
+
+    echo "Options Inserted Successfully!";
+} else {
+    echo "No options provided, skipping InsertOption.";
 }
 
 
-$stmt = $con->prepare("CALL InsertEstimate(?, ?)");
 
-$stmt->bind_param("is",$p_Incident_ID, $p_Cost); 
-$stmt->execute();
-$stmt->close();
+// ## InsertOptions.
+// Debug.
+if (!empty($p_Options)) {
+    echo "Options Found: ";
+    print_r($p_Options); 
 
+    $options = $_POST['Options'] ?? []; // Default to an empty array if not set
+$p_Option1 = $p_Option2 = $p_Option3 = $p_Option4 = $p_Option5 = null;
 
+    // Sets them dynamically. 
+    for ($i = 0; $i < min(5, count($options)); $i++) {
+        ${"p_Option" . ($i + 1)} = $options[$i];
+    }
 
-
-
-
-
+    $stmt = $con->prepare("CALL InsertOption(?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("isssss", $p_Incident_ID, $p_Option1, $p_Option2, $p_Option3, $p_Option4, $p_Option5);
+    // Err msg my problem.
+    if (!$stmt->execute()) {
+        die("Error inserting my options: " . $stmt->error);
+    }
+    $stmt->close();
+    echo "Options Successfully!";
+} else {
+    echo "No options.";
+}
 
 // Print out insert to debug.
 echo "<pre>";
 print_r($_POST);
 echo "</pre>";
 
-
 $con->close(); //close connection.
-
 ?>

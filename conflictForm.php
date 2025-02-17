@@ -59,8 +59,6 @@
                 </div>
             </div>
             <br>
-            <!-- Bottom section should be split into 6 grids, expanding the container width to 1200px 
-             did not fix the setting of the grids. -->
             <div class="bottom-section">
                 <div class="section">
                     <label>Injuries & Damages?</label>
@@ -68,7 +66,7 @@
                 </div>
                 <div class="section">
                     <label>Estimated Cost of Damages?</label>
-                    <input type="text" name="Cost">
+                    <input type="text" name="Cost" placeholder="$ amount">
                 </div>
                 <button type="button" onclick="addTextbox('section1')">Add Row</button> <br>
                 <div id="section1"></div><br>
@@ -81,7 +79,7 @@
                 </div>
                 <div class="section">
                     <label>Officer Name(s):</label>
-                    <input type="text" name="officer_name">
+                    <input type="text" name="Officer_FullName">
                 </div>
                 <button type="button" onclick="addTextbox('section2')">Add Row</button> <br>
                 <div id="section2"></div><br>
@@ -116,8 +114,8 @@
 
             <!-- ## MIN options offered should be two, but other sections to add more. -->
             <div class="row">
-                <label for="options">Options offered:</label>
-                <textarea id="options" name="options" rows="2"></textarea>
+                <label for="Options">Options offered:</label>
+                <textarea id="Options" name="Options[]" rows="2"></textarea>
             </div>
             <button type="button" onclick="addTextbox('section4')">Add Row</button> <br>
                 <div id="section4"></div>
