@@ -7,56 +7,67 @@
     <title>Conflict Report</title>
     <link rel="stylesheet" href="includes/conflictForm.css">
     <script>
-       function addTextbox(containerId) {
-            const container = document.getElementById(containerId);
-            const newDiv = document.createElement("div"); // Wrapper div for each textbox + button
-            
+    function addTextbox(containerId, isTextarea = false) {
+        const container = document.getElementById(containerId);
+        const newDiv = document.createElement("div"); // Wrapper div for each textbox/textarea + button
+
+        // Add max 5 options
+        if (isTextarea) {
+            newDiv.innerHTML = `
+                <textarea name="Options[]" rows="2" required></textarea>
+                <button type="button" onclick="removeTextbox(this)">Remove</button>
+            `;
+        
+        } else {
             newDiv.innerHTML = `
                 <input type="text" name="textboxes[]" placeholder="Enter text" required>
                 <button type="button" onclick="removeTextbox(this)">Remove</button>
             `;
-
-            container.appendChild(newDiv);
         }
 
-        function removeTextbox(button) {
-            button.parentNode.remove(); // Remove the textbox div
-        }
-    </script>
+        container.appendChild(newDiv);
+    }
+
+    function removeTextbox(button) {
+        button.parentNode.remove(); // Remove the wrapper div
+    }
+</script>
 </head>
 
 <body>
     <form action="ProcedurePages/conflictForm_proc.php" method="POST"> <!--Post is needed to process the stored procedure. -->
         <div class="container">
-            <!-- Top section should be split into 2 grids, possibly more? -->
             <h2>CONFLICT REPORT</h2>
             <div class="top-section">
-                <div class="left-grid">
-                    <div class="section">
-                        <label>First Name</label>
-                        <input type="text" name="first_name" placeholder="First Name">
-                        <label>Last Name</label>
-                        <input type="text" name="last_name" placeholder="Last Name">
-                    </div>
-                    <div class="section">
-                        <label>Start of Conflict</label>
-                        <input type="time" name="StartTime">
-                        <label>Date</label>
-                        <input type="date" name="Date">
-                    </div>
-                </div>
-                <div class="right-grid">
+            <div class="left-grid">
                     <div class="section">
                         <label>Staff First Name</label>
                         <input type="text" name="Staff_FirstName" placeholder="Staff First Name">
                         <label>Staff Last Name</label>
                         <input type="text" name="Staff_LastName" placeholder="Staff Last Name">
+                        <label>Date</label>
+                        <input type="date" name="Date">
                     </div>
+                  
+                </div>
+                <div class="right-grid">
+                    <!-- <div class="section">
+                        <label>Workers First Name</label>
+                        <input type="text" name="first_name" placeholder="First Name">
+                        <label>Workers Last Name</label>
+                        <input type="text" name="last_name" placeholder="Last Name">
+                    </div> -->
                     <div class="section">
-                        <label>End of Conflict</label> <!-- Look at length of conflict for time section. -->
+                        <label>Start of Conflict</label>
+                        <input type="time" name="StartTime">
+                        <div class="section">
+                        <label>End of Conflict</label> 
                         <input type="time" name="EndTime">
                     </div>
+                      
+                    </div>
                 </div>
+               
             </div>
             <br>
             <div class="bottom-section">
@@ -66,7 +77,7 @@
                 </div>
                 <div class="section">
                     <label>Estimated Cost of Damages?</label>
-                    <input type="text" name="Cost" placeholder="$ amount">
+                    <input type="text" name="Cost" placeholder="To be filled by supervisor">
                 </div>
                 <button type="button" onclick="addTextbox('section1')">Add Row</button> <br>
                 <div id="section1"></div><br>
@@ -96,7 +107,7 @@
                 </div>
             </div>
             <button type="button" onclick="addTextbox('section3')">Add Row</button> <br>
-                <div id="section3"></div><br>
+            <div id="section3"></div><br>
             <br>
             <!-- Row section for across is fine for now -->
             <div class="row">
@@ -113,18 +124,17 @@
             </div>
 
             <!-- ## MIN options offered should be two, but other sections to add more. -->
+    <!-- This section is different from regular addTextbox, need to grab sectionID of section to store them as one array-->
             <div class="row">
                 <label for="Options">Options offered:</label>
                 <textarea id="Options" name="Options[]" rows="2"></textarea>
             </div>
-            <button type="button" onclick="addTextbox('section4')">Add Row</button> <br>
-                <div id="section4"></div>
+            <button type="button" onclick="addTextbox('section4', true)">Add Row</button> <br>
+            <div id="section4"></div><br>
             <div class="row">
-                <label for="support">What was done to support the upset person?</label>
-                <textarea id="support" name="support" rows="2"></textarea>
+                <label for="Support_txt">What was done to support the upset person?</label>
+                <textarea id="Support_txt" name="Support_txt" rows="2"></textarea>
             </div>
-            <button type="button" onclick="addTextbox('section5')">Add Row</button> <br>
-            <div id="section5"></div><br>
             <div class="row">
                 <label for="Consequences">Logical consequences:</label>
                 <textarea id="Consequences" name="Consequences" rows="2"></textarea>

@@ -122,7 +122,7 @@ while ($con->more_results()) {
 }
 
 
-// Insert Conflict.
+// ## Insert Conflict.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $p_Emp_ID = trim($_POST['Emp_ID'] ?? null);
     $p_Staff_FirstName = trim($_POST['Staff_FirstName'] ?? null);
@@ -145,10 +145,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $p_Team_Ok = trim($_POST['Team_Ok'] ?? null);
     $p_Changes = trim($_POST['Changes'] ?? null);
     $p_Cost = trim($_POST['Cost'] ?? null);
-    $p_Officer_FullName = trim($_POST['officer_name'] ?? null);
-    $p_Options = isset($_POST['Options']) ? $_POST['Options'] : []; // sets options as an array but has issues with functionality of starting first
-    // block off at 0 index, and the second one is label as array [textboxes]. Combine or change functionalty? 
-    
+    $p_Officer_FullName = trim($_POST['Officer_FullName'] ?? null);
+    $Options = isset($_POST['Options']) ? (array)$_POST['Options'] : []; 
+    //checks if it is array,
+    // and typecasted to avoid it being seen as a string.
+    $p_Support_txt = isset($_POST['Support_txt']) ? trim($_POST['Support_txt']) : '';
+
+
   }
 
 // This is to grab Emp_ID from table prior to inserting. 
@@ -196,9 +199,10 @@ $result = $con->query("SELECT LAST_INSERT_ID() AS Incident_ID");
         }
         $stmt->close();
     }
-        echo "Incident_ID Retrieved: " . $p_Incident_ID;
+        echo "Incident_ID Retrieved: " . $p_Incident_ID . "<br>";
 
 // ## Insert Officer.
+
 if (!empty($p_Officer_FullName)) {
     $stmt = $con->prepare("CALL InsertOfficer(?, ?)");
     $stmt->bind_param("is", $p_Incident_ID, $p_Officer_FullName);
@@ -209,50 +213,46 @@ if (!empty($p_Officer_FullName)) {
     $stmt->close();
 }
 //Debug
-echo "Officer Inserted: " . $p_Officer_FullName;
+echo "Officer Inserted: " . $p_Officer_FullName ."<br>";
 
-// Ensure at least one option exists before inserting!
-if ($p_Option1 || $p_Option2 || $p_Option3 || $p_Option4 || $p_Option5) {
-    $stmt = $con->prepare("CALL InsertOption(?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("issss", $p_Incident_ID, $p_Option1, $p_Option2, $p_Option3, $p_Option4, $p_Option5);
+// ## InsertOptions.
+// Removes undefined var warning.
+$p_Option1 = $p_Option2 = $p_Option3 = $p_Option4 = $p_Option5 = null;
+    // Assign values 5
+    for ($i = 0; $i < min(5, count($Options)); $i++) {
+        ${"p_Option" . ($i + 1)} = trim($Options[$i]); // Trim to remove spaces
+    }
+// Debugging Output
+echo "Options Found: ";
+print_r($Options);
+
+$stmt = $con->prepare("CALL InsertOption(?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("isssss", $p_Incident_ID, $p_Option1, $p_Option2, $p_Option3, $p_Option4, $p_Option5);
 
     if (!$stmt->execute()) {
         die("Error inserting options: " . $stmt->error);
     }
-    $stmt->close();
 
-    echo "Options Inserted Successfully!";
-} else {
-    echo "No options provided, skipping InsertOption.";
-}
+$stmt->close();
+// echo "Options Inserted Successfully!";
+// echo "Incident_ID before InsertSupport: " . $p_Incident_ID;
 
 
 
-// ## InsertOptions.
-// Debug.
-if (!empty($p_Options)) {
-    echo "Options Found: ";
-    print_r($p_Options); 
+// ## InsertSupport
+// Removes undefined variable warning
+// Insert Support if Support_txt is provided
+if (!empty($p_Support_txt)) {
+    $stmt = $con->prepare("CALL InsertSupport(?, ?)");
+    $stmt->bind_param("is", $p_Incident_ID, $p_Support_txt);
 
-    $options = $_POST['Options'] ?? []; // Default to an empty array if not set
-$p_Option1 = $p_Option2 = $p_Option3 = $p_Option4 = $p_Option5 = null;
-
-    // Sets them dynamically. 
-    for ($i = 0; $i < min(5, count($options)); $i++) {
-        ${"p_Option" . ($i + 1)} = $options[$i];
-    }
-
-    $stmt = $con->prepare("CALL InsertOption(?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("isssss", $p_Incident_ID, $p_Option1, $p_Option2, $p_Option3, $p_Option4, $p_Option5);
-    // Err msg my problem.
     if (!$stmt->execute()) {
-        die("Error inserting my options: " . $stmt->error);
+        die("Error inserting support: " . $stmt->error);
     }
     $stmt->close();
-    echo "Options Successfully!";
-} else {
-    echo "No options.";
+    echo "Support Inserted Successfully!";
 }
+echo "Support_txt Value: " . $p_Support_txt;
 
 // Print out insert to debug.
 echo "<pre>";
