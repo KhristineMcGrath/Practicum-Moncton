@@ -1,74 +1,186 @@
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
+    font-family: 'Times New Roman', serif;
     background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
+
+/* Container */
 .container {
-    max-width: 900px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* Header */
 header {
     text-align: center;
-    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ddd;
 }
+
 .logo {
     width: 80px;
 }
+
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.filters label {
+    font-weight: bold;
+}
+
+.filters select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #aaa;
+    font-size: 16px;
+    background: #f8f8f8;
+}
+
+/* Table */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
 }
+
 th, td {
+    padding: 12px;
+    text-align: center;
     border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
 }
+
 th {
-    background-color: #f2f2f2;
-}
-input[type="text"] {
-    width: 50px;
-    text-align: center;
-}
-.controls, .export-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-.controls select, .apply {
-    padding: 5px 10px;
-}
-button {
-    padding: 8px 12px;
-    background-color: #007BFF;
+    background: #588ec5;
     color: white;
-    border: none;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Classic Buttons */
+button {
+    padding: 10px 14px;
+    border: 0.5px solid #555;
+    background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+    color: #333;
+    font-size: 15px;
+    border-radius: 2px;
     cursor: pointer;
-    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
 }
+
+
 button:hover {
-    background-color: #0056b3;
+    background: linear-gradient(to bottom, #e0e0e0, #c0c0c0);
 }
+
+/* Special Button Styling */
+.export-buttons button {
+    background: linear-gradient(to bottom, #f8f9fa, #dee2e6);
+}
+
 .back-button {
-    margin-bottom: 20px;
-    display: inline-block;
-    background-color: #6c757d;
+    background: linear-gradient(to bottom, #6c757d, #5a6268);
+    color: white;
 }
+
 .back-button:hover {
-    background-color: #5a6268;
+    background: linear-gradient(to bottom, #5a6268, #4e555b);
 }
-@media (max-width: 600px) {
-    .controls, .export-buttons {
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+.pagination-btn {
+    padding: 8px 14px;
+    background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+    border: 1px solid #555;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.pagination-btn:hover {
+    background: linear-gradient(to bottom, #e0e0e0, #c0c0c0);
+}
+
+.pagination-btn:disabled {
+    background: #ddd;
+    color: #999;
+    cursor: not-allowed;
+}
+
+
+
+@media (max-width: 768px) {
+    .filters {
         flex-direction: column;
         align-items: center;
     }
+
     table {
         font-size: 14px;
+    }
+
+    .pagination {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .export-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 500px) {
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    .pagination-btn {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 12px;
     }
 }
