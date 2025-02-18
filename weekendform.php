@@ -1,7 +1,5 @@
 <?php
 include 'connect.php';
-//outline i added for custom error handling, no isset yet, it can be reused in other files, although it is not in use yet here. -- jj
-//instantiating an empty array to store errors
 $errors = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // make sure weekday is not empty
@@ -10,35 +8,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // make sure date is not empty
-    if (empty(!$_POST["date"])) {
+    if (empty($_POST["date"])) { 
         $errors[] = "Date is required.";
     }
 
     // client name validation
-    if (empty(!$_POST["client_first_name"])) {
+    if (empty($_POST["client_first_name"])) { 
         $errors[] = "Client first name is required.";
     }
 
-    if (empty(!$_POST["client_last_name"])) {
+    if (empty($_POST["client_last_name"])) { 
         $errors[] = "Client last name is required.";
     }
 
     // staff name validation
-    if (empty(!$_POST["staff_first_name"])) {
+    if (empty($_POST["staff_first_name"])) { 
         $errors[] = "Staff first name is required.";
     }
 
-    if (empty(!$_POST["staff_last_name"])) {
+    if (empty($_POST["staff_last_name"])) {
         $errors[] = "Staff last name is required.";
     }
 
     // task empty error handling
-    if (empty(!$_POST["tasks"])) {
+    if (empty($_POST["tasks"])) {
         $errors[] = "At least one task is required.";
     }
 
     // esignature validation
-    if (empty(!$_POST["e_signature"])) {
+    if (empty($_POST["e_signature"])) { 
         $errors[] = "E-signature is required.";
     }
 
@@ -68,8 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <td><input type="time" name="time[]" required></td>
         <td><input type="text" name="tasks[]" required></td>
         <td>
-          <input type="checkbox" name="completed[]"> Yes
-          <input type="checkbox" name="completed[]"> No
+          <input type="checkbox" name="completed[]" value="1"> Yes
         </td>
         <td><button type="button" onclick="removeRow(this)">Remove</button></td>
       `;
@@ -125,15 +122,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><input type="time" name="time[]" required></td>
-            <td><input type="text" name="tasks[]" required></td>
-            <td>
-              <input type="checkbox" name="completed[]"> Yes
-              <input type="checkbox" name="completed[]"> No
-            </td>
-            <td><button type="button" onclick="removeRow(this)">Remove</button></td>
-          </tr>
         </tbody>
       </table>
       <button type="button" class="rowbtn" onclick="addRow()">Add Row</button>
