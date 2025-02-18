@@ -17,7 +17,7 @@ $employees = loadEmployees();
         function toggleSort() {
             const urlParams = new URLSearchParams(window.location.search);
             const currentSort = urlParams.get('sort') || 'status';
-            const newSort = currentSort === 'status' ? 'id' : 'status';
+            const newSort = currentSort === 'status' ? 'Emp_ID' : 'status';
             window.location.search = `?sort=${newSort}`;
         }
 
@@ -74,14 +74,14 @@ $employees = loadEmployees();
                             });
                         } else {
                             usort($employees, function ($a, $b) {
-                                return $a['ID'] <=> $b['ID'];
+                                return $a['Emp_ID'] <=> $b['Emp_ID'];
                             });
                         }
 
                         ?>
                         <?php foreach ($employees as $employee): ?>
                             <tr>
-                                <td><?= htmlspecialchars($employee['ID']) ?></td>
+                                <td><?= htmlspecialchars($employee['Emp_ID']) ?></td>
                                 <td><?= htmlspecialchars($employee['FirstName']) ?></td>
                                 <td><?= htmlspecialchars($employee['LastName']) ?></td>
                                 <td><?= htmlspecialchars($employee['Username']) ?></td>
@@ -90,26 +90,26 @@ $employees = loadEmployees();
                                 <td><?= htmlspecialchars($employee['Role']) ?></td>
                                 <td>
                                     <button class="temp-pass-button"
-                                        data-userid="<?= htmlspecialchars($employee['ID']) ?>">Generate</button>
+                                        data-userid="<?= htmlspecialchars($employee['Emp_ID']) ?>">Generate</button>
                                 </td>
                                 <td>
                                     <?php if ($employee['TempPassword'] != '0'): ?>
-                                        <span class="generated-code" data-userid="<?= htmlspecialchars($employee['ID']) ?>"
+                                        <span class="generated-code" data-userid="<?= htmlspecialchars($employee['Emp_ID']) ?>"
                                             data-initial="true">Password Encrypted</span>
                                     <?php else: ?>
-                                        <span class="generated-code" data-userid="<?= htmlspecialchars($employee['ID']) ?>">No
+                                        <span class="generated-code" data-userid="<?= htmlspecialchars($employee['Emp_ID']) ?>">No
                                             temporary password</span>
                                     <?php endif; ?>
                                     <button class="destroy-pass-button"
-                                        data-userid="<?= htmlspecialchars($employee['ID']) ?>">Destroy</button>
+                                        data-userid="<?= htmlspecialchars($employee['Emp_ID']) ?>">Destroy</button>
                                 </td>
                                 <td>
                                     <button class="edit-button"
-                                        onclick="window.location.href='EmployeeEdit.php?id=<?= htmlspecialchars($employee['ID']) ?>'">Edit</button>
+                                        onclick="window.location.href='EmployeeEdit.php?id=<?= htmlspecialchars($employee['Emp_ID']) ?>'">Edit</button>
 
                                     <!-- Dynamic toggle button for status -->
                                     <button class="action-button toggle-status-button"
-                                        data-userid="<?= htmlspecialchars($employee['ID']) ?>"
+                                        data-userid="<?= htmlspecialchars($employee['Emp_ID']) ?>"
                                         data-status="<?= htmlspecialchars($employee['Status']) ?>"
                                         style="background-color: <?= $employee['Status'] === 'active' ? 'red' : 'green' ?>;">
                                         <?= $employee['Status'] === 'active' ? 'Deactivate' : 'Activate' ?>

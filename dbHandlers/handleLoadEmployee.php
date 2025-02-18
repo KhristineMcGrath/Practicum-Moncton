@@ -4,7 +4,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/Moncton/connect.php');
 // Function to load employees from the database, sorting active ones at the top
 function loadEmployees() {
     global $con;
-    $query = "SELECT * FROM employee ORDER BY Status DESC, ID ASC"; 
+    $query = "SELECT * FROM employee ORDER BY Status DESC, Emp_ID ASC"; 
     $result = mysqli_query($con, $query);
 
     if (!$result) {
@@ -27,7 +27,7 @@ function updateTempPassword($id, $newPassword)
     global $con;
     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT); // Hash the password
 
-    $query = "UPDATE employee SET TempPassword = ? WHERE ID = ?";
+    $query = "UPDATE employee SET TempPassword = ? WHERE Emp_ID = ?";
     $stmt = mysqli_prepare($con, $query);
     if (!$stmt) {
         return ['status' => 'error', 'message' => 'Database error: ' . mysqli_error($con)];
@@ -48,7 +48,7 @@ function destroyTempPassword($id)
 {
     global $con;
 
-    $query = "UPDATE employee SET TempPassword = '0' WHERE ID = ?";
+    $query = "UPDATE employee SET TempPassword = '0' WHERE Emp_ID = ?";
     $stmt = mysqli_prepare($con, $query);
     if (!$stmt) {
         return ['status' => 'error', 'message' => 'Database error: ' . mysqli_error($con)];
@@ -71,7 +71,7 @@ function toggleEmployeeStatus($id, $status)
     global $con;
     $newStatus = ($status === 'active') ? 'inactive' : 'active';
 
-    $query = "UPDATE employee SET Status = ? WHERE ID = ?";
+    $query = "UPDATE employee SET Status = ? WHERE Emp_ID = ?";
     $stmt = mysqli_prepare($con, $query);
     if (!$stmt) {
         die(json_encode(['status' => 'error', 'message' => 'Database error: ' . mysqli_error($con)]));

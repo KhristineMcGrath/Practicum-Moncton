@@ -23,7 +23,7 @@ if (isset($_POST["username"])) {
         // Check if the account is inactive
         if ($status === 'Inactive') {
             $msg = "Account currently not activated. Please contact your supervisor.";
-            header("location:Login.php?message=" . urlencode($msg));
+            header("location:../Login.php?message=" . urlencode($msg));
             exit();
         }
 
@@ -50,24 +50,24 @@ if (isset($_POST["username"])) {
             $_SESSION['username'] = $username;
 
             // Redirect to ConfirmNewPassword.php
-            header("location:ConfirmNewPassword.php");
+            header("location:../ConfirmNewPassword.php");
             exit();
         }
 
         // If all password checks fail, show an error message
         $msg = "Please check your username or password.";
-        header("location:Login.php?message=" . urlencode($msg));
+        header("location:../Login.php?message=" . urlencode($msg));
         exit();
     } else {
         // If the username doesn't exist
         $msg = "Please check your username or password.";
-        header("location:Login.php?message=" . urlencode($msg));
+        header("location:../Login.php?message=" . urlencode($msg));
         exit();
     }
 } else {
     // Prevent direct access to this page
     $msg = "CAN'T ACCESS THIS PAGE DIRECTLY";
-    header("location:Login.php?message=" . urlencode($msg));
+    header("location:../Login.php?message=" . urlencode($msg));
     exit();
 }
 
@@ -75,18 +75,18 @@ function redirectBasedOnRole($role) {
     // Redirect the user based on their role
     switch ($role) {
         case 'Admin':
-            header("location:AdminDash.php");
+            header("location:../AdminDash.php");
             break;
         case 'Member':
-            header("location:MemberDash.php");
+            header("location:../MemberDash.php");
             break;
         case 'Supervisor':
-            header("location:SuperDash.php");
+            header("location:../SuperDash.php");
             break;
         default:
             // Handle invalid roles
             $msg = "Invalid role. Access denied.";
-            header("location:Login.php?message=" . urlencode($msg));
+            header("location:../Login.php?message=" . urlencode($msg));
             break;
     }
     exit();

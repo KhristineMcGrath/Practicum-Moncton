@@ -20,13 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // Hash the new password using PASSWORD_DEFAULT (bcrypt hashing algorithm)
-    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-
-    // Update the database with the hashed password and reset SetupPassword to '0'
     $sql = "UPDATE employee SET Password = ?, SetupPassword = '0' WHERE UserName = ?";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("ss", $hashedPassword, $username);
+    $stmt->bind_param("ss", $newPassword, $username);
 
     if ($stmt->execute()) {
         $msg = "Password updated successfully. You can now log in with your new password.";
@@ -43,3 +39,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 ?>
+
