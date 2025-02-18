@@ -13,7 +13,7 @@ include("Alert.php");
 </head>
 <body>
     <div class="password-container">
-        <form action="passwordChangeProc.php" method="POST">
+        <form action="ProcedurePages/passwordChangeProc.php" method="POST">
             <h2>Change Password</h2>
             <p>Please enter and confirm your new password below.</p>
             <div class="form-group">

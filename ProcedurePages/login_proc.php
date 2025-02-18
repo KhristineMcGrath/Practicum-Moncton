@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include('../connect.php');
 session_start(); // Start the session
 
 if (isset($_POST["username"])) {

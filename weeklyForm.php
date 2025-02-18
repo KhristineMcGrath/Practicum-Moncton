@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container">
         <h1>Weekly Visit Report Form</h1>
-        <form action="weeklyForm_proc.php" method="POST"> <!-- linked to proc.php -->
+        <form action="ProcedurePages/weeklyForm_proc.php" method="POST"> <!-- linked to proc.php -->
 
             <!-- Time section -->
             <div class="visit-schedule">
