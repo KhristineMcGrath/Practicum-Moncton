@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(120deg, #3498db, #8e44ad);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.logo {
+    width: 140px;
+    margin-bottom: 1.5rem;
+}
+
+.form-layout {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.left-section, .right-section {
+    width: 48%;
+    text-align: left;
+}
+
+.right-section #meal-served {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+label {
+    display: block;
+    margin-top: 1rem;
+    color: #555;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    font-size: 1rem;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #3498db;
+}
+
+.attendee {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.attendee input {
+    flex: 1;
+}
+
+.attendee button {
+    padding: 0.3rem 0.8rem;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background 0.3s ease;
+    width: auto;
+    margin-left: 10px;
+}
+
+.attendee button:hover {
+    background-color: #c0392b;
+}
+
+#add-more {
+    padding: 0.5rem 1rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    transition: background 0.3s ease;
+    width: auto;
+}
+
+#add-more:hover {
+    background-color: #2874a6;
+}
+
+button {
+    width: 100%;
+    padding: 1rem;
+    background: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 1rem;
+}
+
+button:hover {
+    background: #2874a6;
+}
+
+.pdf-container {
+    padding: 2rem;
+    border: 2px solid #3498db;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.pdf-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.pdf-header h1 {
+    color: #3498db;
+    font-size: 2.5rem;
+}
+
+.pdf-header p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.pdf-section {
+    margin-bottom: 2rem;
+}
+
+.pdf-section h2 {
+    font-size: 1.8rem;
+    color: #3498db;
+    margin-bottom: 1rem;
+}
+
+.pdf-section p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .form-layout {
+        flex-direction: column;
+    }
+
+    .left-section, .right-section {
+        width: 100%;
+    }
+
+    .left-section input, .right-section input, .left-section select, .right-section select, .left-section textarea, .right-section textarea {
+        width: 100%;
+    }
+}
