@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
-require 'PHPMailer/vendor/autoload.php';
+require '../PHPMailer/vendor/autoload.php';
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["EmailCode"])) {
                     $mail->Body = "Your password reset code is: <b>$resetCode</b><br>This code is valid for 30 minutes.";
 
                     $mail->send();
-                    header("location:InsertCode.php?message=" . urlencode("Check your email for the OTP."));
+                    header("location:../InsertCode.php?message=" . urlencode("Check your email for the OTP."));
                     exit();
                 } catch (Exception $e) {
                     $errors[] = "Could not send the email. Please try again.";
@@ -82,11 +82,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["EmailCode"])) {
     }
 
     if (!empty($errors)) {
-        header("location:forgotPassword.php?message=" . urlencode(implode(" ", $errors)));
+        header("location:../forgotPassword.php?message=" . urlencode(implode(" ", $errors)));
         exit();
     }
 } else {
-    header("location:Login.php?message=" . urlencode("Cannot access this page directly."));
+    header("location:../Login.php?message=" . urlencode("Cannot access this page directly."));
     exit();
 }
 ?>

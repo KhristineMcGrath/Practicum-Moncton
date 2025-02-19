@@ -22,7 +22,7 @@ if (isset($_POST['new_password'], $_POST['confirm_password'])) {
 
     if ($stmt->execute()) {
         $msg = "Password changed successfully.";
-        header("Location: Login.php?message=" . urlencode($msg));
+        header("Location: ../Login.php?message=" . urlencode($msg));
         exit();
     } else {
         $msg = "An error occurred. Please try again.";
@@ -31,7 +31,7 @@ if (isset($_POST['new_password'], $_POST['confirm_password'])) {
     }
 } else {
     $msg = "Invalid request.";
-    header("Location: Login.php?message=" . urlencode($msg));
+    header("Location: ../Login.php?message=" . urlencode($msg));
     exit();
 }
 ?>
