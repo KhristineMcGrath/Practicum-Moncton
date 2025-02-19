@@ -14,9 +14,9 @@
       const newRow = table.insertRow();
       const shiftIndex = table.rows.length - 1; //get the current shift index
       newRow.innerHTML = `
-        <td><input type="date" name="shift_date[]"></td>
-        <td><input type="time" name="shift_time[]"></td>
-        <td><input type="text" name="shift_location[]"></td>
+        <td><input type="date" name="shift_date[]" class="shifts-input"></td>
+        <td><input type="time" name="shift_time[]" class="shifts-input"></td>
+        <td><input type="text" name="shift_location[]" class="shifts-input"></td>
         <td><button type="button" class="removebtn" onclick="removeShift(this)">Remove</button></td>
         <td>
           <table id="tasksTable_${shiftIndex}">

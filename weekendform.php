@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <td>
           <input type="checkbox" name="completed[]" value="1"> Yes
         </td>
-        <td><button type="button" onclick="removeRow(this)">Remove</button></td>
+        <td><button type="button" class="removebtn" onclick="removeRow(this)">Remove</button></td>
       `;
     }
 
