@@ -8,7 +8,7 @@ if (isset($_POST['new_password'], $_POST['confirm_password'])) {
 
     if ($newPassword !== $confirmPassword) {
         $msg = "Passwords do not match.";
-        header("Location: passwordChange.php?message=" . urlencode($msg));
+        header("Location: ../passwordChange.php?message=" . urlencode($msg));
         exit();
     }
 
@@ -26,7 +26,7 @@ if (isset($_POST['new_password'], $_POST['confirm_password'])) {
         exit();
     } else {
         $msg = "An error occurred. Please try again.";
-        header("Location: passwordChange.php?message=" . urlencode($msg));
+        header("Location: ../passwordChange.php?message=" . urlencode($msg));
         exit();
     }
 } else {

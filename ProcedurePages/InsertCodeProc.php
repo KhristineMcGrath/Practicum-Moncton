@@ -57,28 +57,28 @@ if (isset($_POST["otp"])) {
 					$updateStmt->execute();
 
 					$msg = "correct OTP";
-					header("location:passwordChange.php?message=$msg");
+					header("location:../passwordChange.php?message=$msg");
 					exit();
 				} else {
 					// Handle incorrect OTP
 					$msg = "Invalid OTP. Please try again.";
-					header("Location: insertCode.php?message=" . urlencode($msg));
+					header("Location: ../insertCode.php?message=" . urlencode($msg));
 					exit();
 				}
 			} else {
 				// Handle incomplete OTP input
 				$msg = "Please fill all OTP fields.";
-				header("Location: insertCode.php?message=" . urlencode($msg));
+				header("Location: ../insertCode.php?message=" . urlencode($msg));
 				exit();
 			}
 
 		} else {
-			header("location:insertCode.php?message=" . urlencode("Invalid OTP. Please try again."));
+			header("location:../insertCode.php?message=" . urlencode("Invalid OTP. Please try again."));
 			exit();
 		}
 	}
 else {
-	header("location:Login.php?message=" . urlencode("Cannot access this page."));
+	header("location:../Login.php?message=" . urlencode("Cannot access this page."));
 	exit();
 }
 
