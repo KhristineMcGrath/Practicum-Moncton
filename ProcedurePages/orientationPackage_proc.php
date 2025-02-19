@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include("../connect.php");
 
 // connection declaration
 $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);

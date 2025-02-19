@@ -12,7 +12,7 @@
     function addShift() {
       const table = document.getElementById("shiftsTable").getElementsByTagName('tbody')[0];
       const newRow = table.insertRow();
-      const shiftIndex = table.rows.length - 1; // Get the current shift index
+      const shiftIndex = table.rows.length - 1; //get the current shift index
       newRow.innerHTML = `
         <td><input type="date" name="shift_date[]"></td>
         <td><input type="time" name="shift_time[]"></td>
@@ -46,10 +46,7 @@
       const newRow = table.insertRow();
       newRow.innerHTML = `
         <td><input type="text" name="task_description[${shiftIndex}][]"></td>
-        <td>
-          <input type="hidden" name="task_completed[${shiftIndex}][]" value="0">
-          <input type="checkbox" name="task_completed[${shiftIndex}][]" value="1">
-        </td>
+        <td><input type="checkbox" name="task_completed[${shiftIndex}][]"></td>
         <td><button type="button" class="removebtn" onclick="removeTask(this)">Remove</button></td>
       `;
     }
@@ -68,7 +65,7 @@
     </div>
     <h1>Orientation Package Form</h1>
     <hr class="section-divider">
-    <form name="orientationPackage" method="POST" action="orientationPackage_proc.php">
+    <form name="orientationPackage" method="POST" action="ProcedurePages/orientationPackage_proc.php">
       <div class="form-row">
         <div class="form-group">
           <label>Staff First Name: <input type="text" name="staff_first_name" required></label>

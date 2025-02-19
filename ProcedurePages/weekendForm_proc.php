@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include("../connect.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);

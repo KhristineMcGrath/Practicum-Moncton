@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </ul>
       </div>
     <?php endif; ?>
-    <form method="POST" action="weekendForm_proc.php">
+    <form method="POST" action="ProcedurePages/weekendForm_proc.php">
       <div class="form-row">
         <div class="date-section">
           <label>Weekday:
