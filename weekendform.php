@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <td>
           <input type="checkbox" name="completed[]" value="1"> Yes
         </td>
-        <td><button type="button" onclick="removeRow(this)">Remove</button></td>
+        <td><button type="button" class="removebtn" onclick="removeRow(this)">Remove</button></td>
       `;
     }
 
@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </ul>
       </div>
     <?php endif; ?>
-    <form method="POST" action="weekendForm_proc.php">
+    <form method="POST" action="ProcedurePages/weekendForm_proc.php">
       <div class="form-row">
         <div class="date-section">
           <label>Weekday:
