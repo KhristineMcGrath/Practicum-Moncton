@@ -3,18 +3,18 @@ include("dbHandlers/handleUpdateEmployee.php");
 
 $errorMessage = '';
 
-// Check if the ID is passed in the URL
-if (isset($_GET['id'])) {
-    $employeeId = $_GET['id']; // Get the employee ID from the URL
+// Check if the emp_id is passed in the URL
+if (isset($_GET['emp_id']) && is_numeric($_GET['emp_id'])) {
+    $employeeId = intval($_GET['emp_id']); // Sanitize input
 
-    // Fetch the employee details based on the ID
+    // Fetch the employee details based on emp_id
     $employee = getEmployeeById($employeeId);
 
     if (!$employee) {
         $errorMessage = 'Employee not found or invalid request.';
     }
 } else {
-    $errorMessage = 'Invalid request. User ID is missing.';
+    $errorMessage = 'Invalid request. Employee ID is missing.';
 }
 
 // Check if the form was submitted
@@ -28,19 +28,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errorMessage)) {
     // Basic validation
     if (empty($firstName) || empty($lastName) || empty($userName) || empty($email) || empty($role)) {
         $errorMessage = 'All fields are required.';
+    } elseif (!in_array($role, ['Admin', 'Member', 'Supervisor'])) {
+        $errorMessage = 'Invalid role selected.';
     } else {
-        // Check if the username or email already exists in the database
-        if (isUserNameExist($userName) && $userName != $employee['Username']) {
+        // Check if username or email already exists
+        if (isUserNameExist($userName) && $userName !== $employee['Username']) {
             $errorMessage = 'The username is already taken.';
-        } elseif (isEmailExist($email) && $email != $employee['Email']) {
+        } elseif (isEmailExist($email) && $email !== $employee['Email']) {
             $errorMessage = 'The email address is already registered.';
         } else {
             // Call the function to update the employee's information
-            updateEmployee($employeeId, $firstName, $lastName, $userName, $email, $role);
+            $updateSuccess = updateEmployee($employeeId, $firstName, $lastName, $userName, $email, $role);
 
-            // Redirect to Success page after successful update
-            header("Location: Success.php?FirstName=" . urlencode($firstName) . "&LastName=" . urlencode($lastName) . "&Email=" . urlencode($email) . "&Role=" . urlencode($role) . "&Username=" . urlencode($userName));
-            exit();
+            if ($updateSuccess) {
+                // Redirect to success page
+                header("Location: Success.php?FirstName=" . urlencode($firstName) .
+                    "&LastName=" . urlencode($lastName) .
+                    "&Email=" . urlencode($email) .
+                    "&Role=" . urlencode($role) .
+                    "&Username=" . urlencode($userName));
+                exit();
+            } else {
+                $errorMessage = 'Failed to update employee. Please try again.';
+            }
         }
     }
 }
@@ -48,12 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errorMessage)) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Edit Employee</title>
     <link rel="stylesheet" href="includes/EmployeeEdit.css">
 </head>
+
 <body>
     <div class="form-container">
         <h2>Edit Employee Account</h2><br>
@@ -63,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errorMessage)) {
             <div class="error-message"><?php echo htmlspecialchars($errorMessage); ?></div>
         <?php endif; ?>
 
-        <form method="POST" action="">
+        <form method="POST">
             <label>First Name: <input type="text" name="first_name"
                     value="<?php echo htmlspecialchars($employee['FirstName'] ?? ''); ?>" required></label><br>
             <label>Last Name: <input type="text" name="last_name"
@@ -71,19 +83,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errorMessage)) {
             <label>Username: <input type="text" name="user_name"
                     value="<?php echo htmlspecialchars($employee['Username'] ?? ''); ?>" required></label><br>
             <label>Email Address: <input type="email" name="email"
-                    value="<?php echo htmlspecialchars($employee['Email'] ?? ''); ?>" placeholder="@mcrinc.net"
-                    required></label><br>
+                    value="<?php echo htmlspecialchars($employee['Email'] ?? ''); ?>" required></label><br>
             <label>Role:
                 <select name="role" required>
-                    <option value="Member" <?php echo ($employee['Role'] == 'Member') ? 'selected' : ''; ?>>Member
-                    </option>
-                    <option value="Admin" <?php echo ($employee['Role'] == 'Admin') ? 'selected' : ''; ?>>Admin</option>
-                    <option value="Supervisor" <?php echo ($employee['Role'] == 'Supervisor') ? 'selected' : ''; ?>>
-                        Supervisor</option>
-                </select><br>
-            </label><br>
+                    <option value="Member" <?php echo (isset($employee['Role']) && $employee['Role'] == 'Member') ? 'selected' : ''; ?>>Member</option>
+                    <option value="Admin" <?php echo (isset($employee['Role']) && $employee['Role'] == 'Admin') ? 'selected' : ''; ?>>Admin</option>
+                    <option value="Supervisor" <?php echo (isset($employee['Role']) && $employee['Role'] == 'Supervisor') ? 'selected' : ''; ?>>Supervisor</option>
+                </select>
+            </label><br><br>
+
             <button type="submit" class="btn">Update Account</button>
         </form>
     </div>
 </body>
+
 </html>

@@ -2,14 +2,14 @@
 include("connect.php");
 
 // Check if the data exists
-function getEmployeeById($userId) {
+function getEmployeeById($empId) {
     global $con;
-    $sql = "SELECT `ID`, `FirstName`, `LastName`, `Username`, `Email`, `Role`
+    $sql = "SELECT `Emp_ID`, `FirstName`, `LastName`, `Username`, `Email`, `Role`
             FROM `employee`
-            WHERE `ID` = ?";
+            WHERE `Emp_ID` = ?";
     
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("i", $userId);
+    $stmt->bind_param("i", $empId);  // changed $userId to $empId
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -20,17 +20,17 @@ function getEmployeeById($userId) {
 }
 
 // Check if the username already exists (ignoring the current employee)
-function isUserNameExist($userName, $excludeUserId = null) {
+function isUserNameExist($userName, $excludeEmpId = null) {
     global $con;
     $sql = "SELECT 1 FROM `employee` WHERE `Username` = ?";
     
-    if ($excludeUserId) {
-        $sql .= " AND `ID` != ?";
+    if ($excludeEmpId) {
+        $sql .= " AND `Emp_ID` != ?";  // changed `ID` to `Emp_ID`
     }
 
     $stmt = $con->prepare($sql);
-    if ($excludeUserId) {
-        $stmt->bind_param("si", $userName, $excludeUserId);
+    if ($excludeEmpId) {
+        $stmt->bind_param("si", $userName, $excludeEmpId);  // changed $excludeUserId to $excludeEmpId
     } else {
         $stmt->bind_param("s", $userName);
     }
@@ -41,17 +41,17 @@ function isUserNameExist($userName, $excludeUserId = null) {
 }
 
 // Check if the email already exists (ignoring the current employee)
-function isEmailExist($email, $excludeUserId = null) {
+function isEmailExist($email, $excludeEmpId = null) {
     global $con;
     $sql = "SELECT 1 FROM `employee` WHERE `Email` = ?";
 
-    if ($excludeUserId) {
-        $sql .= " AND `ID` != ?";
+    if ($excludeEmpId) {
+        $sql .= " AND `Emp_ID` != ?";  // changed `ID` to `Emp_ID`
     }
 
     $stmt = $con->prepare($sql);
-    if ($excludeUserId) {
-        $stmt->bind_param("si", $email, $excludeUserId);
+    if ($excludeEmpId) {
+        $stmt->bind_param("si", $email, $excludeEmpId);  // changed $excludeUserId to $excludeEmpId
     } else {
         $stmt->bind_param("s", $email);
     }
@@ -62,7 +62,7 @@ function isEmailExist($email, $excludeUserId = null) {
 }
 
 // Update employee details
-function updateEmployee($userId, $firstName, $lastName, $userName, $email, $role) {
+function updateEmployee($empId, $firstName, $lastName, $userName, $email, $role) {
     global $con;
     $sql = "UPDATE `employee` SET 
             `FirstName` = ?, 
@@ -70,10 +70,10 @@ function updateEmployee($userId, $firstName, $lastName, $userName, $email, $role
             `Username` = ?, 
             `Email` = ?, 
             `Role` = ?
-            WHERE `ID` = ?";
+            WHERE `Emp_ID` = ?";  // changed `ID` to `Emp_ID`
     
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("sssssi", $firstName, $lastName, $userName, $email, $role, $userId);
+    $stmt->bind_param("sssssi", $firstName, $lastName, $userName, $email, $role, $empId);  // changed $userId to $empId
     
     return $stmt->execute();
 }

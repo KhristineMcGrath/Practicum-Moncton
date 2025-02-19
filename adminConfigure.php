@@ -97,7 +97,8 @@ $employees = loadEmployees();
                                         <span class="generated-code" data-userid="<?= htmlspecialchars($employee['Emp_ID']) ?>"
                                             data-initial="true">Password Encrypted</span>
                                     <?php else: ?>
-                                        <span class="generated-code" data-userid="<?= htmlspecialchars($employee['Emp_ID']) ?>">No
+                                        <span class="generated-code"
+                                            data-userid="<?= htmlspecialchars($employee['Emp_ID']) ?>">No
                                             temporary password</span>
                                     <?php endif; ?>
                                     <button class="destroy-pass-button"
@@ -105,7 +106,7 @@ $employees = loadEmployees();
                                 </td>
                                 <td>
                                     <button class="edit-button"
-                                        onclick="window.location.href='EmployeeEdit.php?id=<?= htmlspecialchars($employee['Emp_ID']) ?>'">Edit</button>
+                                        onclick="window.location.href='EmployeeEdit.php?emp_id=<?= htmlspecialchars($employee['Emp_ID']) ?>'">Edit</button>
 
                                     <!-- Dynamic toggle button for status -->
                                     <button class="action-button toggle-status-button"
@@ -139,22 +140,20 @@ $employees = loadEmployees();
             data: {
                 action: "toggleStatus",
                 userId: userId,
-                status: currentStatus, 
+                status: newStatus,  // Use newStatus instead of currentStatus
             },
-            contentType: "application/x-www-form-urlencoded", 
             success: function (response) {
-                if (response.status === "success") {
+                var res = JSON.parse(response);
+                if (res.status === "success") {
                     var button = $(".toggle-status-button[data-userid='" + userId + "']");
-
                     button.text(newStatus === 'active' ? "Deactivate" : "Activate")
                         .css("background-color", newStatus === 'active' ? "red" : "green")
                         .data("status", newStatus);
 
-                    // Update the status text in the table row
-                    var statusCell = button.closest('tr').find('td').eq(5); 
+                    var statusCell = button.closest('tr').find('td').eq(5);
                     statusCell.text(newStatus.charAt(0).toUpperCase() + newStatus.slice(1));
                 } else {
-                    alert(response.message || "Error updating status.");
+                    alert(res.message || "Error updating status.");
                 }
             },
             error: function () {
