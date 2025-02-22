@@ -6,10 +6,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-//Load Composer's autoloader
+// Load Composer's autoloader
 require '../PHPMailer/vendor/autoload.php';
 
-//Create an instance; passing `true` enables exceptions
+// Create an instance of PHPMailer
 $mail = new PHPMailer(true);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["EmailCode"])) {
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["EmailCode"])) {
         $stmt->store_result();
 
         if ($stmt->num_rows === 1) {
-            // Generate reset code
+            // Generate a 6-character OTP
             $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
             $resetCode = '';
             for ($i = 0; $i < 6; $i++) {
@@ -42,22 +42,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["EmailCode"])) {
             $codeCreated = date('Y-m-d H:i:s');
             $codeExpires = date('Y-m-d H:i:s', strtotime('+30 minutes'));
 
-            // Update database with the reset code
-            $updateSql = "UPDATE `employee` SET `Code` = ?, `CodeCreate` = ?, `CodeExpire` = ? WHERE `Email` = ?";
-            $updateStmt = $con->prepare($updateSql);
-            $updateStmt->bind_param("ssss", $resetCode, $codeCreated, $codeExpires, $email);
+            // Call the stored procedure to update OTP details
+            $sql = "CALL SetOTP(?, ?, ?, ?)";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("ssss", $email, $resetCode, $codeCreated, $codeExpires);
 
-            if ($updateStmt->execute()) {
-                // Send reset email
-
+            if ($stmt->execute()) {
+                // Store email in session
                 $_SESSION['reset_email'] = $email;
-                $mail = new PHPMailer(true);
+
+                // Send OTP email
                 try {
                     $mail->isSMTP();
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
-                    $mail->Username = 'patelmihir2605@gmail.com';            //SMTP username
-                    $mail->Password = 'nainzhgmaocbrptj';  // Use environment variables
+                    $mail->Username = 'patelmihir2605@gmail.com'; 
+                    $mail->Password = 'nainzhgmaocbrptj';  
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                     $mail->Port = 465;
 
