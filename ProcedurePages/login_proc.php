@@ -6,7 +6,7 @@ if (isset($_POST["username"])) {
     $username = mysqli_real_escape_string($con, $_POST["username"]);
 
     // Query to select the Password, TempPassword, and SetupPassword fields
-    $sql = "SELECT `Username`, `Password`, `TempPassword`, `SetupPassword`, `Email`, `Status`, `role`
+    $sql = "SELECT `Username`, `Password`, `TempPassword`, `SetupPassword`, `Email`, `SetStatus`, `role`
             FROM `employee`
             WHERE `Username` = '$username'";
 
@@ -17,7 +17,7 @@ if (isset($_POST["username"])) {
         $password = $rows["Password"];  
         $tempPassword = $rows["TempPassword"]; 
         $setupPassword = $rows["SetupPassword"]; 
-        $status = $rows["Status"];
+        $status = $rows["SetStatus"];
         $role = $rows["role"];
 
         // Check if the account is inactive

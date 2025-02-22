@@ -4,7 +4,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/Moncton/connect.php');
 // Function to load employees from the database, sorting active ones at the top
 function loadEmployees() {
     global $con;
-    $query = "SELECT * FROM employee ORDER BY Status DESC, Emp_ID ASC"; 
+    $query = "SELECT * FROM employee ORDER BY SetStatus DESC, Emp_ID ASC"; 
     $result = mysqli_query($con, $query);
 
     if (!$result) {
@@ -69,18 +69,18 @@ function destroyTempPassword($id)
 function toggleEmployeeStatus($id, $status)
 {
     global $con;
-    $newStatus = ($status === 'active') ? 'inactive' : 'active';
+    //$newStatus = ($status === 'Active') ? 'Inactive' : 'Active'; // Updated to match DB capitalization
 
-    $query = "UPDATE employee SET Status = ? WHERE Emp_ID = ?";
+    $query = "UPDATE employee SET SetStatus = ? WHERE Emp_ID = ?"; // Updated field name to SetStatus
     $stmt = mysqli_prepare($con, $query);
     if (!$stmt) {
         die(json_encode(['status' => 'error', 'message' => 'Database error: ' . mysqli_error($con)]));
     }
-    mysqli_stmt_bind_param($stmt, 'si', $newStatus, $id);
+    mysqli_stmt_bind_param($stmt, 'si', $status, $id);
     $result = mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    return $result ? $newStatus : false;
+    return $result ? $status : false;
 }
 
 // Handle the action based on the POST request

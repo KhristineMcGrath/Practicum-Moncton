@@ -48,7 +48,7 @@ function createEmployee($firstName, $lastName, $userName, $email, $role, $hashed
   global $con;
 
   // Prepare the SQL query to insert a new employee with Status set to 'Active'
-  $sql = "INSERT INTO employee (FirstName, LastName, UserName, Email, Role, SetupPassword, Status) 
+  $sql = "INSERT INTO employee (FirstName, LastName, UserName, Email, Role, SetupPassword, SetStatus) 
           VALUES (?, ?, ?, ?, ?, ?, ?)";
 
   $status = 'Active';

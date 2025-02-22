@@ -64,9 +64,9 @@ $employees = loadEmployees();
                         // Sorting logic based on URL parameter
                         if (isset($_GET['sort']) && $_GET['sort'] === 'status') {
                             usort($employees, function ($a, $b) {
-                                if ($a['Status'] === 'active' && $b['Status'] !== 'active') {
+                                if ($a['SetStatus'] === 'Active' && $b['SetStatus'] !== 'Active') {
                                     return -1;
-                                } elseif ($a['Status'] !== 'active' && $b['Status'] === 'active') {
+                                } elseif ($a['SetStatus'] !== 'Active' && $b['SetStatus'] === 'Active') {
                                     return 1;
                                 } else {
                                     return 0;
@@ -86,7 +86,7 @@ $employees = loadEmployees();
                                 <td><?= htmlspecialchars($employee['LastName']) ?></td>
                                 <td><?= htmlspecialchars($employee['Username']) ?></td>
                                 <td><?= htmlspecialchars($employee['Email']) ?></td>
-                                <td><?= htmlspecialchars($employee['Status']) ?></td>
+                                <td><?= htmlspecialchars($employee['SetStatus']) ?></td>
                                 <td><?= htmlspecialchars($employee['Role']) ?></td>
                                 <td>
                                     <button class="temp-pass-button"
@@ -111,9 +111,9 @@ $employees = loadEmployees();
                                     <!-- Dynamic toggle button for status -->
                                     <button class="action-button toggle-status-button"
                                         data-userid="<?= htmlspecialchars($employee['Emp_ID']) ?>"
-                                        data-status="<?= htmlspecialchars($employee['Status']) ?>"
-                                        style="background-color: <?= $employee['Status'] === 'active' ? 'red' : 'green' ?>;">
-                                        <?= $employee['Status'] === 'active' ? 'Deactivate' : 'Activate' ?>
+                                        data-status="<?= htmlspecialchars($employee['SetStatus']) ?>"
+                                        style="background-color: <?= $employee['SetStatus'] === 'Active' ? 'red' : 'green' ?>;">
+                                        <?= $employee['SetStatus'] === 'Active' ? 'Deactivate' : 'Activate' ?>
                                     </button>
                                 </td>
                             </tr>
@@ -132,7 +132,7 @@ $employees = loadEmployees();
     $(".toggle-status-button").click(function () {
         var userId = $(this).data("userid");
         var currentStatus = $(this).data("status");
-        var newStatus = currentStatus === 'active' ? 'inactive' : 'active';
+        var newStatus = currentStatus === 'Active' ? 'Inactive' : 'Active'; // Updated status comparison
 
         $.ajax({
             url: "dbHandlers/handleLoadEmployee.php",
@@ -140,18 +140,18 @@ $employees = loadEmployees();
             data: {
                 action: "toggleStatus",
                 userId: userId,
-                status: newStatus,  // Use newStatus instead of currentStatus
+                status: newStatus,  // Ensure the new status matches the capitalized format
             },
             success: function (response) {
                 var res = JSON.parse(response);
                 if (res.status === "success") {
                     var button = $(".toggle-status-button[data-userid='" + userId + "']");
-                    button.text(newStatus === 'active' ? "Deactivate" : "Activate")
-                        .css("background-color", newStatus === 'active' ? "red" : "green")
+                    button.text(newStatus === 'Active' ? "Deactivate" : "Activate")
+                        .css("background-color", newStatus === 'Active' ? "red" : "green")
                         .data("status", newStatus);
 
                     var statusCell = button.closest('tr').find('td').eq(5);
-                    statusCell.text(newStatus.charAt(0).toUpperCase() + newStatus.slice(1));
+                    statusCell.text(newStatus); // Display status with first letter capitalized
                 } else {
                     alert(res.message || "Error updating status.");
                 }
@@ -161,6 +161,7 @@ $employees = loadEmployees();
             },
         });
     });
+
 
 
     // When the page loads, set the initial status of the toggle button based on the employee status
